@@ -10,3 +10,5 @@
 .tag-pending{background:var(--gold-light);color:#92753c;border-color:#eadfbe}
 h1,h2,h3{overflow-wrap:break-word}.review-confirmed{display:block;font-size:9px;color:#5a7c52;margin-top:13px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+
+.pages-banner{background:#eaf4eb;border-bottom:1px solid #dce6d9;padding:12px 0;font-size:13px;line-height:1.6;color:#174c36}.pages-banner a{font-weight:700;color:#174c36;margin-left:8px}.launch-guide{max-width:880px;padding-bottom:60px}.launch-guide pre{padding:20px;background:#f0f5ef;border:1px solid #dce6d9;border-radius:12px;overflow-x:auto;line-height:1.7;font-size:14px}.launch-guide code{overflow-wrap:anywhere}.launch-guide pre code{overflow-wrap:normal}

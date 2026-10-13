@@ -2,6 +2,8 @@
 
 (() => {
   const $ = (selector, root = document) => root.querySelector(selector);
+  const siteBase = $('meta[name="baknin-base"]')?.content || '/';
+  const siteUrl = href => href.startsWith('/') && !href.startsWith('//') ? siteBase + href.slice(1) : href;
   const sentimentLabels = {positive: 'Положительная', negative: 'Отрицательная', neutral: 'Нейтральная', mixed: 'Смешанная'};
   const reliabilityLabels = {insufficient: 'Недостаточно данных', limited: 'Ограниченная выборка', moderate: 'Умеренная выборка', high: 'Большая выборка'};
   const aspectLabels = {education: 'Качество обучения', teaching: 'Преподавание и учебный процесс', teachers: 'Преподаватели', career: 'Практика и трудоустройство', dormitory: 'Общежитие', accommodation: 'Общежитие', practice: 'Практика', employment: 'Трудоустройство', infrastructure: 'Инфраструктура', administration: 'Администрация', student_life: 'Студенческая жизнь', admission: 'Поступление', cost: 'Стоимость обучения', finance: 'Стоимость и финансы', scholarships: 'Стипендии', food: 'Питание', research: 'Наука'};
@@ -40,7 +42,7 @@
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.setAttribute('aria-label', `${text} (откроется в новой вкладке)`);
-    } else a.href = href;
+    } else a.href = siteUrl(href);
     return a;
   }
 
@@ -51,6 +53,7 @@
   }
 
   async function api(path, options = {}) {
+    if (globalThis.BakninPagesAPI) return globalThis.BakninPagesAPI.request(path, options);
     const response = await fetch(path, {...options, headers: {'Accept': 'application/json', ...options.headers}});
     const data = await response.json().catch(() => null);
     if (!response.ok) throw new Error(typeof data?.error === 'string' ? data.error : 'Не удалось получить данные. Попробуйте ещё раз.');

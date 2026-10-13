@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Как запустить — АГРО / ОТЗЫВЫ{% endblock %}
+{% block page %}launch{% endblock %}
+{% block content %}
+<section class="container page-section method-content launch-guide">
+  <div class="page-heading"><span class="eyebrow">ИНСТРУКЦИЯ</span><h1>Запуск на вашем компьютере</h1><p>Сайт можно открыть онлайн или запустить полную версию с базой данных и Python на своём компьютере.</p></div>
+  <article class="method-article"><h2>1. Скачайте проект и установите Python</h2><p>Установите Python 3.11 или 3.12 (64-бит). В установщике Windows отметьте «Add Python to PATH». Скачайте репозиторий кнопкой Code → Download ZIP и распакуйте его.</p><a class="button button-primary" href="https://github.com/Sweaty6/Baknin_Project/archive/refs/heads/main.zip">Скачать проект →</a></article>
+  <article class="method-article"><h2>2. Откройте PowerShell в папке проекта</h2><p>В этой папке должны находиться app.py и requirements.txt. Введите команды по очереди:</p><pre><code>py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m baknin.cli init
+.\.venv\Scripts\python.exe app.py</code></pre><p>Если у вас Python 3.12, замените первую команду на <code>py -3.12 -m venv .venv</code>. Дождитесь окончания установки пакетов.</p></article>
+  <article class="method-article"><h2>3. Откройте сайт</h2><p>Введите в браузере <code>http://127.0.0.1:5000</code>. Оставьте окно PowerShell открытым. Для остановки нажмите Ctrl+C. При следующем запуске достаточно последней команды.</p><p>При первой установке сайт содержит справочник пяти вузов. Реальные отзывы нужно импортировать отдельно; обученная ML-модель не входит в комплект. Словарный анализ работает сразу, но требует проверки.</p></article>
+  <article class="method-article"><h2>Онлайн-версия и полная версия</h2><p>GitHub Pages показывает каталог и опубликованные данные, а словарный анализ выполняет в браузере. Вводимый текст не отправляется на сервер анализа. Импорт, ручной аудит SQLite и обучение доступны в полной Python-версии.</p><a class="text-link" href="https://github.com/Sweaty6/Baknin_Project/blob/main/docs/LAUNCH.md">Подробная инструкция: Windows, Linux, ошибки и публикация →</a></article>
+</section>
+{% endblock %}

@@ -13,3 +13,5 @@ instance/
 *.zip
 test-results/
 playwright-report/
+_site/
+_preview/

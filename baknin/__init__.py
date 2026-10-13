@@ -93,6 +93,10 @@ def create_app(test_config=None):
     def methodology_page():
         return render_template("methodology.html")
 
+    @app.get("/launch")
+    def launch_page():
+        return render_template("launch.html")
+
     @app.get("/health")
     def health():
         from .db import connect

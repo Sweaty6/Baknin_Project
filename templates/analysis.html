@@ -8,7 +8,7 @@
     <form id="analysis-form" class="panel analysis-editor">
       <div class="editor-heading"><label for="analysis-text">Текст отзыва</label><span id="text-counter">0 / 5 000</span></div>
       <textarea id="analysis-text" name="text" rows="12" maxlength="5000" required placeholder="Вставьте отзыв об университете…" aria-describedby="analysis-hint"></textarea>
-      <p id="analysis-hint" class="field-hint">Текст отправляется на сервер для анализа, но не публикуется в каталоге отзывов.</p>
+      <p id="analysis-hint" class="field-hint">{% if config.get('PAGE_MODE') == 'pages' %}Текст обрабатывается локально в вашем браузере и не отправляется на сервер анализа.{% else %}Текст отправляется на сервер для анализа, но не публикуется в каталоге отзывов.{% endif %}</p>
       <div class="editor-actions"><button id="analysis-submit" class="button button-primary" type="submit">Проанализировать <span aria-hidden="true">→</span></button><button class="button button-quiet" type="reset">Очистить</button></div>
     </form>
     <div id="analysis-result" class="panel analysis-output" aria-live="polite" aria-busy="false">
