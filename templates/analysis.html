@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Анализ отзыва — АГРО / ОТЗЫВЫ{% endblock %}
+{% block page %}analysis{% endblock %}
+{% block content %}
+<section class="container page-section">
+  <div class="page-heading"><span class="eyebrow">ОТ ТЕКСТА К СМЫСЛУ</span><h1>Что стоит за отзывом?</h1><p>Проверьте тональность текста и посмотрите, какие стороны студенческой жизни в нём упоминаются.</p></div>
+  <div class="analysis-grid">
+    <form id="analysis-form" class="panel analysis-editor">
+      <div class="editor-heading"><label for="analysis-text">Текст отзыва</label><span id="text-counter">0 / 5 000</span></div>
+      <textarea id="analysis-text" name="text" rows="12" maxlength="5000" required placeholder="Вставьте отзыв об университете…" aria-describedby="analysis-hint"></textarea>
+      <p id="analysis-hint" class="field-hint">Текст отправляется на сервер для анализа, но не публикуется в каталоге отзывов.</p>
+      <div class="editor-actions"><button id="analysis-submit" class="button button-primary" type="submit">Проанализировать <span aria-hidden="true">→</span></button><button class="button button-quiet" type="reset">Очистить</button></div>
+    </form>
+    <div id="analysis-result" class="panel analysis-output" aria-live="polite" aria-busy="false">
+      <div class="analysis-placeholder"><span class="outline-leaf" aria-hidden="true">✳</span><h2>У каждого текста<br>есть оттенки.</h2><p>Здесь появятся тональность, обнаруженные темы и объяснение результата.</p><span class="placeholder-label">Начните с текста отзыва слева</span></div>
+    </div>
+  </div>
+  <div class="quiet-note"><span aria-hidden="true">ⓘ</span><p>Сарказм, сравнения и смешанные впечатления могут быть распознаны неверно. Результат — подсказка для чтения, а не подтверждённая оценка качества университета.</p></div>
+</section>
+{% endblock %}

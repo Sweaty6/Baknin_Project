@@ -1,0 +1,47 @@
+[
+  {
+    "id": "timiryazev",
+    "full_name": "Российский государственный аграрный университет — МСХА имени К. А. Тимирязева",
+    "short_name": "РГАУ-МСХА",
+    "city": "Москва",
+    "region": "Москва",
+    "official_url": "https://www.timacad.ru/",
+    "official_url_live_verified": false
+  },
+  {
+    "id": "kubsau",
+    "full_name": "Кубанский государственный аграрный университет имени И. Т. Трубилина",
+    "short_name": "Кубанский ГАУ",
+    "city": "Краснодар",
+    "region": "Краснодарский край",
+    "official_url": "https://kubsau.ru/",
+    "official_url_live_verified": false
+  },
+  {
+    "id": "dongau",
+    "full_name": "Донской государственный аграрный университет",
+    "short_name": "Донской ГАУ",
+    "city": "Персиановский",
+    "region": "Ростовская область",
+    "official_url": "https://www.dongau.ru/",
+    "official_url_live_verified": false
+  },
+  {
+    "id": "kazgau",
+    "full_name": "Казанский государственный аграрный университет",
+    "short_name": "Казанский ГАУ",
+    "city": "Казань",
+    "region": "Республика Татарстан",
+    "official_url": "https://kazgau.ru/",
+    "official_url_live_verified": false
+  },
+  {
+    "id": "omgau",
+    "full_name": "Омский государственный аграрный университет имени П. А. Столыпина",
+    "short_name": "Омский ГАУ",
+    "city": "Омск",
+    "region": "Омская область",
+    "official_url": "https://www.omgau.ru/",
+    "official_url_live_verified": false
+  }
+]

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Отзывы студентов — АГРО / ОТЗЫВЫ{% endblock %}
+{% block page %}reviews{% endblock %}
+{% block content %}
+<section class="container page-section">
+  <div class="page-heading"><span class="eyebrow">ГОЛОС СТУДЕНТОВ</span><h1>Отзывы и их контекст</h1><p>Читайте оригинальные впечатления, смотрите темы и проверяйте источники публикаций.</p></div>
+  <form id="review-filters" class="filter-panel review-filter-panel" aria-label="Фильтры отзывов">
+    <div class="field"><label for="review-university">Университет</label><select id="review-university" name="university_id"><option value="">Все университеты</option></select></div>
+    <div class="field"><label for="review-sentiment">Тональность</label><select id="review-sentiment" name="sentiment"><option value="">Любая</option><option value="positive">Положительная</option><option value="negative">Отрицательная</option><option value="neutral">Нейтральная</option></select></div>
+    <div class="field"><label for="review-aspect">Тема</label><select id="review-aspect" name="aspect"><option value="">Все темы</option></select></div>
+    <div class="field"><label for="review-source">Источник</label><select id="review-source" name="source_id"><option value="">Все источники</option></select></div>
+    <div class="field"><label for="review-date-from">С даты</label><input id="review-date-from" type="date" name="date_from"></div>
+    <div class="field"><label for="review-date-to">По дату</label><input id="review-date-to" type="date" name="date_to"></div>
+    <button class="button button-primary filter-submit" type="submit">Показать <span aria-hidden="true">→</span></button>
+  </form>
+  <div class="results-top"><p id="review-count" role="status" aria-live="polite">Загружаем отзывы…</p><span>Автоматические оценки требуют проверки</span></div>
+  <div id="review-list" class="review-grid" aria-live="polite" aria-busy="true"><div class="loading-state">Загрузка данных…</div></div>
+  <nav id="review-pagination" class="pagination" aria-label="Страницы отзывов"></nav>
+</section>
+{% endblock %}

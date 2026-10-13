@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Университет — АГРО / ОТЗЫВЫ{% endblock %}
+{% block page %}university{% endblock %}
+{% block body_attributes %}data-university-id="{{ university_id | default(id | default('')) }}"{% endblock %}
+{% block content %}
+<section class="container page-section">
+  <a class="back-link" href="/">← Все университеты</a>
+  <div id="university-detail" aria-live="polite" aria-busy="true"><div class="loading-state">Загружаем информацию об университете…</div></div>
+</section>
+{% endblock %}

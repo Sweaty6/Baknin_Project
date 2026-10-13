@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}Страница недоступна — АГРО / ОТЗЫВЫ{% endblock %}
+{% block page %}error{% endblock %}
+{% block content %}<section class="container error-page"><span class="eyebrow">{{ code | default(status | default(404)) }}</span><h1>{{ title | default('Не удалось открыть страницу') }}</h1><p>{{ message | default('Проверьте адрес или вернитесь к списку университетов.') }}</p><a class="button button-primary" href="/">К университетам <span aria-hidden="true">→</span></a></section>{% endblock %}

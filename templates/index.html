@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Опыт студентов. Открытые источники.</span>
+      <h1>Университет<br>за пределами<br><em>официальных цифр.</em></h1>
+      <p class="hero-description">Отзывы об аграрных вузах России — с источниками, темами и прозрачным анализом тональности.</p>
+      <div class="hero-actions"><a class="button button-primary" href="#universities">Найти университет <span aria-hidden="true">→</span></a><a class="text-link" href="/methodology">Как это работает <span aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="hero-visual" aria-label="От текста отзыва к темам студенческого опыта">
+      <span class="visual-index">ОТЗЫВЫ → КОНТЕКСТ → ВЫБОР</span>
+      <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-orbit orbit-three"></div>
+      <svg class="field-art" viewBox="0 0 440 330" fill="none" aria-hidden="true"><path d="M37 296c29-61 57-95 104-107 52-13 89 0 142-17 61-19 99-67 122-124M43 325c29-65 64-98 113-110 50-12 97-1 143-17 58-20 96-65 123-112M80 343c31-60 62-88 116-93 39-4 76 4 114-12 48-20 78-53 111-98M135 344c32-39 63-62 105-63 32-1 56-1 82-15 46-24 65-43 95-77M216 346c29-20 48-29 83-37 41-9 77-32 118-69" stroke="#b9d0b3" stroke-width="2"/><path d="M114 171V76m0 56c-29 0-45-22-43-46 26 0 43 19 43 46Zm0-34c0-29 17-47 43-47 2 25-17 47-43 47Z" stroke="#ccae65" stroke-width="2.2" stroke-linejoin="round"/><circle cx="327" cy="72" r="33" fill="#dcc586" fill-opacity=".92"/></svg>
+      <div class="visual-card visual-card-one"><span class="small-label">ЧТО ОБСУЖДАЮТ</span><strong>Учёба и преподаватели</strong><span class="visual-card-line"></span><span class="visual-card-line short"></span></div>
+      <div class="visual-card visual-card-two"><span class="small-label">ВАЖЕН КОНТЕКСТ</span><strong>Практика. Общежитие.<br>Студенческая жизнь.</strong><span class="mini-dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+      <span class="visual-bottom">У каждого отзыва есть история.</span>
+    </div>
+  </div>
+</section>
+<section class="container catalog-section" id="universities">
+  <div class="section-heading"><div><span class="eyebrow">ОТЗЫВЫ ОБ АГРАРНЫХ ВУЗАХ</span><h2>Найдите свой университет</h2></div><a class="text-link" href="/methodology#ranking">Как считается рейтинг <span aria-hidden="true">→</span></a></div>
+  <form id="university-filters" class="filter-panel" role="search" aria-label="Поиск университетов">
+    <div class="field field-search"><label for="university-query">Название или город</label><div class="input-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="university-query" name="q" type="search" placeholder="Например, Москва или аграрный" autocomplete="off"></div></div>
+    <div class="field"><label for="region">Регион</label><select id="region" name="region"><option value="">Все регионы</option></select></div>
+    <div class="field"><label for="date-from">Отзывы с</label><input id="date-from" type="date" name="date_from"></div>
+    <div class="field"><label for="date-to">Отзывы по</label><input id="date-to" type="date" name="date_to"></div>
+    <button class="button button-primary filter-submit" type="submit">Найти <span aria-hidden="true">→</span></button>
+  </form>
+  <div class="results-top"><p id="university-count" role="status" aria-live="polite">Загружаем университеты…</p><span>Данные с указанием источников</span></div>
+  <div id="university-list" class="university-grid" aria-live="polite" aria-busy="true"><div class="loading-state">Загрузка данных…</div></div>
+  <div class="quiet-note"><span aria-hidden="true">ⓘ</span><p>Доля положительных отзывов описывает доступную выборку. При недостатке проверенных данных место в рейтинге и сглаженная оценка не рассчитываются.</p></div>
+</section>
+<section class="principles-band"><div class="container principles-grid"><div class="principle"><span class="principle-number">01</span><h3>Отзывы с источниками</h3><p>Можно перейти к публикации и увидеть, откуда взят отзыв.</p></div><div class="principle"><span class="principle-number">02</span><h3>Темы, а не только оценка</h3><p>Учёба, практика, бытовые условия — впечатления разделены по аспектам.</p></div><div class="principle"><span class="principle-number">03</span><h3>Открытая методология</h3><p>Режим анализа и ограничения данных доступны для проверки.</p></div></div></section>
+{% endblock %}
