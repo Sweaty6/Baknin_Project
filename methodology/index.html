@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#174c36">
+  <meta name="description" content="Отзывы об аграрных университетах: источники, тональность и темы студенческого опыта.">
+  <meta name="baknin-base" content="/Baknin_Project/">
+  <title>Методология — АГРО / ОТЗЫВЫ</title>
+  <link rel="stylesheet" href="/Baknin_Project/static/style.css">
+  
+  <script src="/Baknin_Project/static/pages-nlp.js" defer></script>
+  <script src="/Baknin_Project/static/pages-api.js" defer></script>
+  
+  <script src="/Baknin_Project/static/app.js" defer></script>
+</head>
+<body data-page="methodology" >
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/Baknin_Project/" aria-label="АГРО / ОТЗЫВЫ — главная">
+        <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M18 30V11M18 21C9 21 7 15 8 9c7 0 10 5 10 12ZM18 15c0-7 5-11 11-11 1 7-3 11-11 11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>АГРО<span class="brand-slash"> / </span>ОТЗЫВЫ<span class="brand-caption">Университет глазами студентов</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Основная навигация">
+        <a href="/Baknin_Project/" >Университеты</a>
+        <a href="/Baknin_Project/reviews" >Отзывы</a>
+        <a href="/Baknin_Project/analysis" >Анализ текста</a>
+        <a href="/Baknin_Project/methodology" aria-current="page">Методология</a>
+      </nav>
+    </div>
+  </header>
+  
+  <aside class="pages-banner"><div class="container">Онлайн-версия: текст анализируется в вашем браузере. Каталог обновляется при публикации. <a href="/Baknin_Project/launch">Как запустить полную версию →</a></div></aside>
+  
+  <main id="main">
+<section class="container page-section methodology-page">
+  <div class="page-heading"><span class="eyebrow">ПРОЗРАЧНОСТЬ ПРЕЖДЕ ВСЕГО</span><h1>Как устроен анализ</h1><p>От открытой публикации до оценки тональности. Что мы учитываем и где заканчиваются возможности алгоритма.</p></div>
+  <div class="method-layout">
+    <nav class="method-nav" aria-label="Разделы методологии"><a href="#sources">01. Источники</a><a href="#sentiment">02. Анализ текста</a><a href="#aspects">03. Темы отзывов</a><a href="#ranking">04. Рейтинг</a><a href="#limitations">05. Ограничения</a></nav>
+    <div class="method-content">
+      <article class="method-article" id="sources"><span class="eyebrow">01 / СБОР ДАННЫХ</span><h2>У каждого отзыва есть источник</h2><p>Для публикаций сохраняются платформа, ссылка на оригинал, дата публикации и дата получения данных. Полный текст показывается только тогда, когда это разрешено для соответствующего источника.</p><p>Повторные публикации и неподтверждённые записи не должны искусственно увеличивать объём выборки. Отзывы без разрешения на показ доступны через ссылку на источник.</p></article>
+      <article class="method-article" id="sentiment"><span class="eyebrow">02 / ТОНАЛЬНОСТЬ</span><h2>Три класса, много нюансов</h2><p>Анализ выделяет положительную, отрицательную или нейтральную тональность. Отдельно отмечаются смешанные впечатления и тексты, которые требуют проверки.</p><div id="engine-info" class="info-card"><strong>Режим анализа уточняется…</strong><p>Сведения о модели и её проверке загружаются с сервера.</p></div><p>Словарный режим опирается на слова и выражения с известной эмоциональной окраской. Это базовый инструмент: он не даёт подтверждённой вероятности правильного ответа и требует проверки человеком.</p></article>
+      <article class="method-article" id="aspects"><span class="eyebrow">03 / АСПЕКТЫ</span><h2>Разделяем общий опыт на темы</h2><p>В одном отзыве могут одновременно хвалить преподавателей и критиковать общежитие. Анализ тем помогает увидеть такие различия, не сводя весь опыт к одной оценке.</p><div id="method-aspects" class="topic-chips"><span class="tag">Темы загружаются…</span></div></article>
+      <article class="method-article" id="ranking"><span class="eyebrow">04 / СРАВНЕНИЕ</span><h2>Количество данных имеет значение</h2><p>Доля положительных отзывов описывает проверенную выборку, даже когда она мала. Сглаженная оценка и место в рейтинге показываются только при достаточном числе отзывов. Записи, требующие проверки, учитываются отдельно.</p><div id="ranking-info" class="info-card"><strong>Правила расчёта</strong><p>Параметры текущего расчёта загружаются с сервера.</p></div><p>При фильтрации по периоду состав выборки меняется. Поэтому результаты относятся к выбранному периоду и не являются универсальной оценкой вуза.</p></article>
+      <article class="method-article" id="limitations"><span class="eyebrow">05 / ГРАНИЦЫ МЕТОДА</span><h2>Отзывы — один из источников информации</h2><ul class="prose-list"><li>Авторы отзывов не представляют всех студентов университета.</li><li>Количество публикаций зависит от площадки и доступности данных.</li><li>Сарказм, сложные отрицания и контекст могут приводить к ошибкам.</li><li>Высокая оценка не заменяет проверку программы, аккредитации и условий обучения.</li></ul><div id="model-validation" class="validation-note"></div></article>
+    </div>
+  </div>
+</section>
+</main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong>АГРО / ОТЗЫВЫ</strong><p>Больше контекста для осознанного выбора.</p></div>
+      <p class="footer-note">Автоматический анализ может ошибаться.<br>Читайте сами отзывы и проверяйте их источники.</p>
+      <a class="text-link" href="/Baknin_Project/methodology">Принципы и ограничения <span aria-hidden="true">→</span></a>
+      <a class="text-link" href="/Baknin_Project/launch">Инструкция запуска →</a>
+    </div>
+  </footer>
+</body>
+</html>
