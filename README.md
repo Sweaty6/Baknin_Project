@@ -4,9 +4,10 @@
 прозрачный рейтинг, анализ текста и открытая методика. Основной способ использования —
 открыть опубликованный сайт в браузере; устанавливать программу на компьютер не нужно.
 
-**Адрес после включения GitHub Pages:**
+**Открыть сайт:**
 [https://sweaty6.github.io/Baknin_Project/](https://sweaty6.github.io/Baknin_Project/).
-До успешной публикации этот адрес может возвращать 404.
+Доступность проверена 14 октября 2026 года. Сейчас сайт опубликован из `gh-pages`;
+для автоматического обновления из `main` настройте GitHub Actions по инструкции.
 
 **[Подробно: как опубликовать сайт на GitHub Pages](docs/GITHUB_PAGES.md).**
 Весь основной процесс выполняется на сайте GitHub, без установки Python или Node.js.
@@ -15,10 +16,12 @@
 
 1. В [Settings → Pages](https://github.com/Sweaty6/Baknin_Project/settings/pages)
    в разделе **Build and deployment** выберите **Source: GitHub Actions**.
-2. Откройте [Actions](https://github.com/Sweaty6/Baknin_Project/actions),
+2. В **Settings → Environments → github-pages** разрешите ветку `main`
+   в **Deployment branches and tags**, если раньше была разрешена только `gh-pages`.
+3. Откройте [Actions](https://github.com/Sweaty6/Baknin_Project/actions),
    выберите **Publish GitHub Pages**, нажмите **Run workflow**, выберите `main`
    и подтвердите запуск.
-3. Дождитесь зелёного результата. Откройте адрес сайта, показанный в
+4. Дождитесь зелёного результата. Откройте адрес сайта, показанный в
    **Settings → Pages** или в результате публикации.
 
 Последующие изменения `main` автоматически собирают и публикуют новую версию.
