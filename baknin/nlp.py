@@ -16,58 +16,29 @@ import unicodedata
 
 
 SENTIMENTS = ("positive", "negative", "neutral")
-RULES_VERSION = "ru-aspect-rules-1"
 ARTIFACT_FORMAT = "baknin-tfidf-logistic-v1"
-ASPECT_LABELS = {
-    "teaching": "Преподавание и учебный процесс",
-    "career": "Практика и трудоустройство",
-    "dormitory": "Общежитие",
-    "infrastructure": "Инфраструктура",
-    "administration": "Администрация",
-    "student_life": "Студенческая жизнь",
-    "finance": "Стоимость и финансы",
-}
 
-# Prefixes cover ordinary Russian inflections without changing negation tokens.
-_ASPECT_PATTERNS = {
-    "teaching": r"преподавател\w*|педагог\w*|учител\w*|профессор\w*|лекци\w*|семинар\w*|учеб\w*|обучен\w*|образован\w*|заняти\w*|экзамен\w*|зачет\w*|предмет\w*|дисциплин\w*|курсов\w*|диплом\w*",
-    "career": r"практик\w*|стажиров\w*|трудоустрой\w*|карьер\w*|работодател\w*|ваканси\w*|работ(?:а|у|ы|е|ой|ами|ах|ам)|професси[яиюйе]\w*",
-    "dormitory": r"общежити\w*|общаг\w*|заселен\w*|комендант\w*",
-    "infrastructure": r"корпус\w*|аудитори\w*|библиотек\w*|лаборатори\w*|оборудован\w*|компьютер\w*|интернет\w*|wifi|wi\s?fi|спортзал\w*|столов\w*|кампус\w*|здани\w*|инфраструктур\w*|ремонт\w*",
-    "administration": r"администраци\w*|декан\w*|ректо[рв]\w*|канцеляри\w*|бюрократ\w*|документ\w*|справк\w*|приемн\w*|расписани\w*|руководств\w*",
-    "student_life": r"студсовет\w*|студенческ\w*|клуб\w*|круж[окк]\w*|мероприяти\w*|концерт\w*|фестивал\w*|волонтер\w*|секци\w*|спорт\w*|досуг\w*",
-    "finance": r"стоимост\w*|оплат\w*|платн\w*|цен[ауы]\w*|цене|ценой|стипенди\w*|бюджет\w*|денег|деньг\w*|финанс\w*|дорог\w*|дешев\w*",
-}
+# The Node website and this optional Python toolkit share one checked-in source
+# of labels, lexicons and patterns. No fallback copy can silently drift from it.
+_RULES_PATH = Path(__file__).resolve().parent.parent / "website" / "data" / "rules.json"
+_RULES = json.loads(_RULES_PATH.read_text(encoding="utf-8"))
+RULES_VERSION = _RULES["version"]
+ASPECT_LABELS = dict(_RULES["aspect_labels"])
 _ASPECT_REGEX = {
-    name: re.compile(r"^(?:" + pattern + r")$", re.IGNORECASE)
-    for name, pattern in _ASPECT_PATTERNS.items()
+    name: re.compile(pattern, re.IGNORECASE)
+    for name, pattern in _RULES["aspect_patterns"].items()
 }
-_POSITIVE = re.compile(
-    r"^(?:отличн\w*|прекрасн\w*|замечательн\w*|хорош\w*|добр\w*|"
-    r"грамотн\w*|талантлив\w*|интересн\w*|удобн\w*|качествен\w*|"
-    r"чист\w*|современн\w*|просторн\w*|уютн\w*|полезн\w*|доступн\w*|"
-    r"лучш\w*|довол\w*|успеш\w*|дружелюбн\w*|отзывчив\w*|комфортн\w*|"
-    r"профессиональн\w*|нравит\w*|нравят\w*|понрав\w*|рекоменд\w*|"
-    r"помога\w*|поддержива\w*|дешев\w*)$"
-)
-_NEGATIVE = re.compile(
-    r"^(?:плох\w*|ужас\w*|отврат\w*|кошмар\w*|груб\w*|хам\w*|"
-    r"невеж\w*|некомпетент\w*|некачествен\w*|скуч\w*|гряз\w*|"
-    r"тесн\w*|аварийн\w*|сломан\w*|холодн\w*|дорог\w*|завыш\w*|"
-    r"бюрократ\w*|проблем\w*|разочар\w*|непонят\w*|слаб\w*|"
-    r"переполн\w*|неработа\w*|коррупц\w*|ненави\w*|недовол\w*)$"
-)
+# Preserve the historical unanchored helper interface while compiling the
+# canonical anchored definitions directly above.
+_ASPECT_PATTERNS = {
+    name: pattern[4:-2] if pattern.startswith("^(?:") and pattern.endswith(")$") else pattern
+    for name, pattern in _RULES["aspect_patterns"].items()
+}
+_POSITIVE = re.compile(_RULES["positive_pattern"])
+_NEGATIVE = re.compile(_RULES["negative_pattern"])
+_STOPWORDS = set(_RULES["stopwords"])
 _TOKEN = re.compile(r"[a-zа-я0-9]+", re.IGNORECASE)
 _CLAUSES = re.compile(r"[.!?;,\n]+|\s+\b(?:но|однако|зато)\b\s+", re.IGNORECASE)
-_STOPWORDS = {
-    "а", "без", "бы", "был", "была", "были", "было", "в", "во", "все", "всего",
-    "для", "до", "его", "ее", "если", "есть", "еще", "же", "за", "и", "из",
-    "или", "им", "их", "к", "как", "ко", "когда", "который", "ли", "мне",
-    "мой", "мы", "на", "над", "наш", "не", "него", "ней", "нет", "ни", "но",
-    "ну", "о", "об", "однако", "он", "она", "они", "от", "очень", "по", "под",
-    "при", "про", "с", "со", "так", "там", "то", "только", "тут", "у", "уже",
-    "что", "чтобы", "это", "этот", "я",
-}
 
 
 def normalize_text(text: str) -> str:

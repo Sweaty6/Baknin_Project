@@ -16,6 +16,17 @@
   const compare = (left, right) => left < right ? -1 : left > right ? 1 : 0;
   const approved = value => value === true || value === 1;
   const eligible = review => approved(review.approved) && sentiments.has(review.sentiment);
+  const calendarTimezone = "Europe/Moscow";
+  const calendarFormatter = new Intl.DateTimeFormat("en-CA", {
+    timeZone: calendarTimezone, year: "numeric", month: "2-digit", day: "2-digit",
+  });
+
+  function calendarDate(value) {
+    const parsed = new Date(value);
+    if (!Number.isFinite(parsed.getTime())) throw new Error("В опубликованных данных есть неверная дата отзыва");
+    const parts = Object.fromEntries(calendarFormatter.formatToParts(parsed).map(part => [part.type, part.value]));
+    return `${parts.year.padStart(4, "0")}-${parts.month}-${parts.day}`;
+  }
 
   async function snapshot() {
     if (!snapshotPromise) {
@@ -88,7 +99,7 @@
       if (selected.sentiment && review.sentiment !== selected.sentiment) return false;
       if (selected.source_id && String(review.source?.id) !== selected.source_id) return false;
       if (selected.aspect && !(review.aspects || []).some(aspect => aspect.aspect === selected.aspect)) return false;
-      const publishedDay = String(review.published_at || "").slice(0, 10);
+      const publishedDay = calendarDate(review.published_at);
       if (selected.date_from && publishedDay < selected.date_from) return false;
       if (selected.date_to && publishedDay > selected.date_to) return false;
       if (searchText && query) {
@@ -185,13 +196,39 @@
     const result = {
       ...data.methodology, engine: "browser_rules", model_version: data.rules.version + "-browser",
       metrics_available: false, metrics: null, exported_at: data.exported_at,
-      deployment: "github_pages", snapshot: true,
+      deployment: "github_pages", snapshot: true, timezone: calendarTimezone,
     };
     // Nested descriptors must not suggest that Pages hosts a trained model.
     for (const key of ["analyzer", "model"]) if (result[key]) result[key] = {
       engine: result.engine, model_version: result.model_version, confidence: null,
     };
     return result;
+  }
+
+  function universityDetail(data, id) {
+    const university = ranking(data, {}).items.find(item => item.id === id);
+    if (!university) throw new Error("Вуз не найден");
+    const reviews = data.reviews.filter(review => review.university_id === id).sort(reviewOrder);
+    const monthly = new Map();
+    const sources = new Map();
+    for (const review of reviews) {
+      const month = calendarDate(review.published_at).slice(0, 7);
+      if (!monthly.has(month)) monthly.set(month, {month, total: 0, positive: 0, negative: 0, neutral: 0, needs_review: 0});
+      const counts = monthly.get(month);
+      counts.total += 1;
+      counts[eligible(review) ? review.sentiment : "needs_review"] += 1;
+      const source = review.source;
+      if (!sources.has(source.id)) sources.set(source.id, {
+        id: source.id, platform: source.platform, url: source.url, terms_checked_at: source.terms_checked_at, review_count: 0,
+      });
+      sources.get(source.id).review_count += 1;
+    }
+    return {
+      university, dynamics: [...monthly.values()].sort((left, right) => compare(left.month, right.month)),
+      topics: topics(reviews.filter(eligible)),
+      sources: [...sources.values()].sort((left, right) => compare(left.platform, right.platform) || left.id - right.id),
+      recent_reviews: reviews.slice(0, 5), methodology: methodology(data),
+    };
   }
 
   async function request(path, options = {}) {
@@ -221,8 +258,9 @@
       let id;
       try { id = decodeURIComponent(url.pathname.slice("/api/universities/".length)); }
       catch { throw new Error("Неверный идентификатор университета"); }
-      if (!Object.hasOwn(data.details, id)) throw new Error("Вуз не найден");
-      result = { ...data.details[id], methodology: methodology(data) };
+      result = Object.hasOwn(data.details, id)
+        ? { ...data.details[id], methodology: methodology(data) }
+        : universityDetail(data, id);
     } else if (url.pathname === "/api/reviews") {
       const page = integer(url.searchParams.get("page") ?? "1", "page", 1);
       const perPage = integer(url.searchParams.get("per_page") ?? "20", "per_page", 1, 100n);

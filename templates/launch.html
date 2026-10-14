@@ -1,15 +1,81 @@
 {% extends 'base.html' %}
-{% block title %}Как запустить — АГРО / ОТЗЫВЫ{% endblock %}
+{% block title %}Публикация сайта — АГРО / ОТЗЫВЫ{% endblock %}
 {% block page %}launch{% endblock %}
 {% block content %}
-<section class="container page-section method-content launch-guide">
-  <div class="page-heading"><span class="eyebrow">ИНСТРУКЦИЯ</span><h1>Запуск на вашем компьютере</h1><p>Сайт можно открыть онлайн или запустить полную версию с базой данных и Python на своём компьютере.</p></div>
-  <article class="method-article"><h2>1. Скачайте проект и установите Python</h2><p>Установите Python 3.11 или 3.12 (64-бит). В установщике Windows отметьте «Add Python to PATH». Скачайте репозиторий кнопкой Code → Download ZIP и распакуйте его.</p><a class="button button-primary" href="https://github.com/Sweaty6/Baknin_Project/archive/refs/heads/main.zip">Скачать проект →</a></article>
-  <article class="method-article"><h2>2. Откройте PowerShell в папке проекта</h2><p>В этой папке должны находиться app.py и requirements.txt. Введите команды по очереди:</p><pre><code>py -3.11 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m baknin.cli init
-.\.venv\Scripts\python.exe app.py</code></pre><p>Если у вас Python 3.12, замените первую команду на <code>py -3.12 -m venv .venv</code>. Дождитесь окончания установки пакетов.</p></article>
-  <article class="method-article"><h2>3. Откройте сайт</h2><p>Введите в браузере <code>http://127.0.0.1:5000</code>. Оставьте окно PowerShell открытым. Для остановки нажмите Ctrl+C. При следующем запуске достаточно последней команды.</p><p>При первой установке сайт содержит справочник пяти вузов. Реальные отзывы нужно импортировать отдельно; обученная ML-модель не входит в комплект. Словарный анализ работает сразу, но требует проверки.</p></article>
-  <article class="method-article"><h2>Онлайн-версия и полная версия</h2><p>GitHub Pages показывает каталог и опубликованные данные, а словарный анализ выполняет в браузере. Вводимый текст не отправляется на сервер анализа. Импорт, ручной аудит SQLite и обучение доступны в полной Python-версии.</p><a class="text-link" href="https://github.com/Sweaty6/Baknin_Project/blob/main/docs/LAUNCH.md">Подробная инструкция: Windows, Linux, ошибки и публикация →</a></article>
+<section class="container page-section publication-guide">
+  <div class="page-heading">
+    <span class="eyebrow">ДЛЯ ВЛАДЕЛЬЦА РЕПОЗИТОРИЯ</span>
+    <h1>Опубликуйте сайт<br>на GitHub Pages</h1>
+    <p>Настройте публикацию один раз через интерфейс GitHub. После этого изменения в ветке <code>main</code> будут автоматически обновлять сайт.</p>
+  </div>
+  <div class="publication-summary">
+    <div><span class="small-label">РЕПОЗИТОРИЙ</span><a href="https://github.com/Sweaty6/Baknin_Project" target="_blank" rel="noopener noreferrer">Sweaty6 / Baknin_Project →</a></div>
+    <div><span class="small-label">АДРЕС САЙТА</span><a href="https://sweaty6.github.io/Baknin_Project/" target="_blank" rel="noopener noreferrer">sweaty6.github.io/Baknin_Project/ →</a></div>
+    <div><span class="small-label">ЧТО НУЖНО</span><p>Браузер и доступ к настройкам репозитория</p></div>
+  </div>
+  <div class="publication-layout">
+    <nav class="method-nav" aria-label="Шаги публикации">
+      <a href="#repository">01. Проверьте файлы</a>
+      <a href="#pages-settings">02. Включите Pages</a>
+      <a href="#publish">03. Запустите публикацию</a>
+      <a href="#open-website">04. Откройте сайт</a>
+      <a href="#updates">05. Обновляйте сайт</a>
+      <a href="#troubleshooting">06. Если возникла ошибка</a>
+    </nav>
+    <div class="publication-content">
+      <article class="method-article" id="repository">
+        <span class="eyebrow">01 / ПОДГОТОВКА</span><h2>Проверьте репозиторий</h2>
+        <p>Откройте <a class="inline-link" href="https://github.com/Sweaty6/Baknin_Project" target="_blank" rel="noopener noreferrer">Sweaty6/Baknin_Project</a>. На вкладке <strong>Code</strong> выберите ветку <code>main</code>. В репозитории должен находиться файл <code>.github/workflows/pages.yml</code> — он описывает автоматическую сборку и публикацию.</p>
+        <p>Войдите под учётной записью владельца или участника с правом изменять настройки репозитория. Для публикации не нужно устанавливать программы на компьютер: GitHub собирает файлы сайта самостоятельно.</p>
+      </article>
+      <article class="method-article" id="pages-settings">
+        <span class="eyebrow">02 / НАСТРОЙКА</span><h2>Выберите GitHub Actions</h2>
+        <ol class="prose-list">
+          <li>В репозитории откройте вкладку <strong>Settings</strong>.</li>
+          <li>В левом меню найдите <strong>Code and automation → Pages</strong>.</li>
+          <li>В разделе <strong>Build and deployment</strong> откройте список <strong>Source</strong>.</li>
+          <li>Выберите <strong>GitHub Actions</strong>.</li>
+        </ol>
+        <div class="publication-path" aria-label="Путь к настройке"><span>Settings</span><span aria-hidden="true">→</span><span>Pages</span><span aria-hidden="true">→</span><span>Source: GitHub Actions</span></div>
+        <p>Workflow уже находится в проекте. Дополнительный шаблон сайта выбирать не требуется. Если вкладка Pages или список Source недоступны, проверьте права своей учётной записи и доступность Pages для выбранного репозитория.</p>
+      </article>
+      <article class="method-article" id="publish">
+        <span class="eyebrow">03 / ПУБЛИКАЦИЯ</span><h2>Запустите готовый workflow</h2>
+        <ol class="prose-list">
+          <li>Перейдите на вкладку <strong>Actions</strong>. Если GitHub предлагает включить workflows, разрешите их запуск для этого репозитория.</li>
+          <li>В списке слева выберите <strong>Publish GitHub Pages</strong>.</li>
+          <li>Нажмите <strong>Run workflow</strong>, выберите ветку <code>main</code> и подтвердите кнопкой <strong>Run workflow</strong>.</li>
+          <li>Откройте появившийся запуск и дождитесь зелёного статуса. Сборка и публикация обычно занимают несколько минут.</li>
+        </ol>
+        <a class="button button-primary" href="https://github.com/Sweaty6/Baknin_Project/actions/workflows/pages.yml" target="_blank" rel="noopener noreferrer">Открыть Publish GitHub Pages →</a>
+        <p class="publication-after-button">Каждый последующий коммит в <code>main</code> также запускает публикацию автоматически.</p>
+      </article>
+      <article class="method-article" id="open-website">
+        <span class="eyebrow">04 / ПРОВЕРКА</span><h2>Откройте опубликованный сайт</h2>
+        <p>Вернитесь в <strong>Settings → Pages</strong> и нажмите <strong>Visit site</strong>. Адрес также доступен в результате завершившейся публикации на вкладке Actions.</p>
+        <a class="button button-secondary" href="https://sweaty6.github.io/Baknin_Project/" target="_blank" rel="noopener noreferrer">Открыть сайт →</a>
+        <p class="publication-after-button">Для этого репозитория адрес — <code>https://sweaty6.github.io/Baknin_Project/</code>. Если вы публикуете копию проекта, используйте адрес из своих настроек Pages: имя владельца и репозитория будут другими.</p>
+        <p>Проверьте каталог университетов, страницу отзывов, анализ текста и методологию. Откройте карточку вуза и убедитесь, что страницы доступны по прямым ссылкам и удобно читаются на телефоне.</p>
+      </article>
+      <article class="method-article" id="updates">
+        <span class="eyebrow">05 / ОБНОВЛЕНИЯ</span><h2>Изменения публикуются из main</h2>
+        <p>Сохраняйте изменения страниц и опубликованных данных в ветку <code>main</code> — напрямую или через объединение pull request. Дождитесь завершения нового запуска <strong>Publish GitHub Pages</strong>, затем обновите страницу сайта.</p>
+        <p>Каталог вузов хранится в <code>website/data/catalog.json</code>, отзывы для публикации — в <code>website/data/reviews.json</code>. При редактировании сохраняйте формат данных и добавляйте только реальные записи с проверенными источниками и разрешением на показ текста. Правила заполнения описаны в инструкции репозитория.</p>
+        <p>Каталог показывает данные, включённые в последнюю публикацию. Ввод на странице анализа не добавляет отзыв в каталог. Если подтверждённых отзывов ещё нет, сайт честно покажет пустую выборку и не будет создавать оценки.</p>
+        <div class="info-card"><strong>Как работает опубликованный сайт</strong><p>Страницы открываются в браузере. Текст отзыва анализируется словарными правилами на вашем устройстве и не отправляется на сервер анализа. Точность на независимом корпусе не подтверждена; результат требует проверки человеком.</p></div>
+      </article>
+      <article class="method-article" id="troubleshooting">
+        <span class="eyebrow">06 / РЕШЕНИЕ ПРОБЛЕМ</span><h2>Если публикация не удалась</h2>
+        <dl class="publication-help">
+          <div><dt>Не видно Publish GitHub Pages</dt><dd>Проверьте наличие <code>.github/workflows/pages.yml</code> в <code>main</code> и разрешение запуска GitHub Actions в настройках репозитория.</dd></div>
+          <div><dt>Запуск отмечен красным</dt><dd>Откройте запуск на вкладке Actions и разверните первый шаг с ошибкой. Проверьте Source: GitHub Actions и сообщения в журнале. После исправления повторите запуск через Run workflow.</dd></div>
+          <div><dt>Сайт возвращает 404</dt><dd>Дождитесь успешного завершения публикации и откройте точный адрес через Visit site. Для текущего проекта в адресе должен присутствовать путь <code>/Baknin_Project/</code>.</dd></div>
+          <div><dt>Обновления ещё не видны</dt><dd>Убедитесь, что изменения попали в <code>main</code>, а последний workflow завершился успешно. Обновите страницу без кеша или проверьте сайт в новом приватном окне браузера.</dd></div>
+          <div><dt>Нет отзывов или рейтинга</dt><dd>Проверьте наличие реальных, разрешённых к публикации данных. Пустой каталог отзывов или отсутствие места при малой выборке не означают ошибку публикации.</dd></div>
+        </dl>
+        <a class="text-link" href="https://github.com/Sweaty6/Baknin_Project/blob/main/docs/LAUNCH.md" target="_blank" rel="noopener noreferrer">Подробная инструкция в репозитории →</a>
+      </article>
+    </div>
+  </div>
 </section>
 {% endblock %}

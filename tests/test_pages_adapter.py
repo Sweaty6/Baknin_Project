@@ -128,6 +128,19 @@ def test_review_filters_order_and_pagination_match_server(published):
         assert entry["result"] == client.get(path).json, path
 
 
+def test_details_without_precomputed_cache_preserve_global_rank_and_topics(published):
+    client, manifest = published
+    manifest["details"] = {}
+    paths = ["/api/universities/kubsau", "/api/universities/timiryazev", "/api/universities/kazgau"]
+    entries = browser_requests(manifest, [{"path": path} for path in paths])["results"]
+    for path, entry in zip(paths, entries, strict=True):
+        expected = client.get(path).json
+        result = entry["result"]
+        for key in ["university", "dynamics", "topics", "sources", "recent_reviews"]:
+            assert result[key] == expected[key], (path, key)
+    assert entries[0]["result"]["university"]["rank"] == 3
+
+
 def test_methodology_health_detail_and_prediction_describe_browser_rules(published):
     _, manifest = published
     manifest["methodology"].update(engine="tfidf_logistic", metrics_available=True, metrics={"accuracy": 1.0})
@@ -180,3 +193,32 @@ def test_hidden_text_not_searchable_and_unknown_university_is_controlled(publish
     assert result[0]["result"]["total"] == 0
     assert result[1]["error"] == "Вуз не найден"
     assert result[2]["result"]["total"] == 10
+
+
+def test_moscow_calendar_boundaries_match_visible_review_dates_and_months(published):
+    _, manifest = published
+    times = ["2026-01-31T20:59:59Z", "2026-01-31T21:00:00Z", "2026-02-01T21:00:00Z", "2026-01-31T21:30:00Z"]
+    labels = ["positive", "negative", "neutral", "positive"]
+    rows = manifest["reviews"][:4]
+    for index, (row, published_at, sentiment) in enumerate(zip(rows, times, labels, strict=True), 1):
+        row.update(id=index, university_id="timiryazev", published_at=published_at,
+                   sentiment=sentiment, approved=True, needs_review=False)
+    manifest["reviews"] = rows
+    manifest["details"] = {}
+    entries = browser_requests(manifest, [
+        {"path": "/api/reviews?date_from=2026-01-31&date_to=2026-01-31"},
+        {"path": "/api/reviews?date_from=2026-02-01&date_to=2026-02-01"},
+        {"path": "/api/universities?university_id=timiryazev&date_from=2026-02-01&date_to=2026-02-01"},
+        {"path": "/api/universities/timiryazev"},
+        {"path": "/api/methodology"},
+    ])["results"]
+    assert [row["id"] for row in entries[0]["result"]["items"]] == [1]
+    assert [row["id"] for row in entries[1]["result"]["items"]] == [4, 2]
+    filtered = entries[2]["result"]["items"][0]
+    assert filtered["reviews_total"] == 2
+    assert filtered["positive"] == filtered["negative"] == 1
+    assert entries[3]["result"]["dynamics"] == [
+        {"month": "2026-01", "total": 1, "positive": 1, "negative": 0, "neutral": 0, "needs_review": 0},
+        {"month": "2026-02", "total": 3, "positive": 1, "negative": 1, "neutral": 1, "needs_review": 0},
+    ]
+    assert entries[4]["result"]["timezone"] == "Europe/Moscow"

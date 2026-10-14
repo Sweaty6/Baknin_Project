@@ -5,9 +5,10 @@ import hashlib
 import json
 import math
 from collections import Counter, defaultdict
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
+from zoneinfo import ZoneInfo
 
 from .db import connect
 from .nlp import ASPECT_LABELS, normalize_text
@@ -15,6 +16,7 @@ from .nlp import ASPECT_LABELS, normalize_text
 SENTIMENTS = {"positive", "neutral", "negative", "uncertain"}
 MAX_TEXT_LENGTH = 5_000
 MAX_SQL_INTEGER = 2**63 - 1
+CALENDAR_TIMEZONE = ZoneInfo("Europe/Moscow")
 
 
 def _json(value):
@@ -49,6 +51,22 @@ def _timestamp(value, name):
         return parsed.astimezone(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
     except (OverflowError, ValueError) as exc:
         raise ValueError(f"{name}: дата выходит за поддерживаемый диапазон") from exc
+
+
+def _calendar_boundary(day, name, end_of_day=False):
+    """Convert a user-facing Moscow calendar boundary to the stored UTC clock."""
+    local = datetime.combine(day, time.max if end_of_day else time.min, tzinfo=CALENDAR_TIMEZONE)
+    return _timestamp(local.isoformat(), name)
+
+
+def _calendar_month(timestamp):
+    try:
+        parsed = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(CALENDAR_TIMEZONE).date().isoformat()[:7]
+    except (ValueError, OverflowError) as exc:
+        raise ValueError("Дата публикации выходит за поддерживаемый календарный диапазон") from exc
 
 
 def _text_hash(text):
@@ -202,10 +220,44 @@ def _validate_review(record, known_universities):
             "source_review_id": source_review_id.strip() if source_review_id is not None else None}
 
 
+def _physical_review(connection, item):
+    """Find the original publication before doing per-university text dedup.
+
+    An external review ID identifies a post on its source, including when the
+    supplied URL points at a shared listing. Without that ID, the URL itself
+    must identify one post; it cannot be reused to manufacture extra reviews.
+    """
+    external_id = item["source_review_id"]
+    if external_id is not None:
+        candidates = connection.execute(
+            "SELECT r.id,r.university_id,r.source_review_id FROM reviews r "
+            "JOIN sources s ON s.id=r.source_id "
+            "WHERE (r.source_review_id=? AND s.url=?) "
+            "OR (r.source_url=? AND r.source_review_id IS NULL) ORDER BY r.id",
+            (external_id, item["platform_url"], item["source_url"]),
+        ).fetchall()
+    else:
+        candidates = connection.execute(
+            "SELECT id,university_id,source_review_id FROM reviews WHERE source_url=? ORDER BY id",
+            (item["source_url"],),
+        ).fetchall()
+    if any(row["university_id"] != item["university_id"] for row in candidates):
+        raise ValueError("Публикация источника уже привязана к другому вузу; проверьте university_id")
+    if external_id is None and len({row["source_review_id"] for row in candidates
+                                    if row["source_review_id"] is not None}) > 1:
+        raise ValueError("Для общей страницы с несколькими отзывами требуется source_review_id")
+    return candidates[0] if candidates else None
+
+
 def import_reviews(db_path, input_path, analyzer):
     """Atomically import verified JSONL. Any invalid line rolls back every line."""
     statistics = {"imported": 0, "duplicates": 0, "pending_moderation": 0}
     with connect(db_path) as connection:
+        # Serialize the identity check and insertion, including across separate
+        # import processes. The old schema's external-ID constraint includes a
+        # university, so that constraint alone cannot prevent cross-university
+        # assignments. No existing corpus is deleted or rewritten here.
+        connection.execute("BEGIN IMMEDIATE")
         known = {row["id"] for row in connection.execute("SELECT id FROM universities")}
         with Path(input_path).open(encoding="utf-8-sig") as input_file:
             for line_number, line in enumerate(input_file, 1):
@@ -213,15 +265,11 @@ def import_reviews(db_path, input_path, analyzer):
                     continue
                 try:
                     item = _validate_review(json.loads(line), known)
-                    duplicate = connection.execute(
-                        "SELECT id FROM reviews WHERE university_id=? AND text_hash=?",
-                        (item["university_id"], item["text_hash"]),
-                    ).fetchone()
-                    if not duplicate and item["source_review_id"] is not None:
+                    duplicate = _physical_review(connection, item)
+                    if not duplicate:
                         duplicate = connection.execute(
-                            "SELECT r.id FROM reviews r JOIN sources s ON s.id=r.source_id "
-                            "WHERE r.university_id=? AND r.source_review_id=? AND s.platform=? AND s.url=?",
-                            (item["university_id"], item["source_review_id"], item["platform"], item["platform_url"]),
+                            "SELECT id FROM reviews WHERE university_id=? AND text_hash=?",
+                            (item["university_id"], item["text_hash"]),
                         ).fetchone()
                     if duplicate:
                         statistics["duplicates"] += 1
@@ -334,6 +382,9 @@ def _where(filters=None, search_reviews=True):
         pending = value is True or str(value).lower() in {"true", "1"}
         clauses.append("r.approved=?")
         parameters.append(int(not pending))
+    if filters.get("pending_aspects"):
+        clauses.append("r.approved=1 AND EXISTS(SELECT 1 FROM review_aspects ra "
+                       "WHERE ra.review_id=r.id AND ra.approved=0)")
     aspect = filters.get("aspect")
     if aspect:
         clauses.append("EXISTS(SELECT 1 FROM review_aspects ra WHERE ra.review_id=r.id AND ra.aspect=?)")
@@ -345,7 +396,15 @@ def _where(filters=None, search_reviews=True):
         parameters.extend([query, query, query])
     if filters.get("date_from"):
         clauses.append("r.published_at>=?")
-        parameters.append(_timestamp(filters["date_from"], "date_from"))
+        start = str(filters["date_from"])
+        if len(start) == 10:
+            try:
+                start_date = date.fromisoformat(start)
+            except ValueError as exc:
+                raise ValueError("date_from: неверная дата") from exc
+            parameters.append(_calendar_boundary(start_date, "date_from"))
+        else:
+            parameters.append(_timestamp(start, "date_from"))
     if filters.get("date_to"):
         end = str(filters["date_to"])
         if len(end) == 10:
@@ -355,11 +414,11 @@ def _where(filters=None, search_reviews=True):
                 raise ValueError("date_to: неверная дата") from exc
             if end_date == date.max:
                 clauses.append("r.published_at<=?")
-                parameters.append("9999-12-31T23:59:59Z")
+                parameters.append(_calendar_boundary(end_date, "date_to", end_of_day=True))
             else:
-                exclusive = (end_date + timedelta(days=1)).isoformat()
+                exclusive = end_date + timedelta(days=1)
                 clauses.append("r.published_at<?")
-                parameters.append(_timestamp(exclusive, "date_to"))
+                parameters.append(_calendar_boundary(exclusive, "date_to"))
         else:
             clauses.append("r.published_at<=?")
             parameters.append(_timestamp(end, "date_to"))
@@ -525,7 +584,7 @@ def university_detail(db_path, university_id, min_reviews=10, smoothing=10):
         monthly = defaultdict(Counter)
         eligible_ids = []
         for row in rows:
-            counts = monthly[row["published_at"][:7]]
+            counts = monthly[_calendar_month(row["published_at"])]
             counts["total"] += 1
             if row["approved"] and row["sentiment"] in {"positive", "neutral", "negative"}:
                 counts[row["sentiment"]] += 1
@@ -563,6 +622,7 @@ def methodology(db_path, min_reviews=10, smoothing=10):
                   "pending_moderation": counts["pending"], "sources": sources}
     return {"counts": statistics, "stats": statistics, "sources": source_list, "last_updated": last_updated,
             "requires_corpus": counts["total"] == 0,
+            "timezone": CALENDAR_TIMEZONE.key,
             "models": models, "min_reviews": min_reviews, "smoothing": smoothing, "min_topic_reviews": 3,
             "score_formula": f"100 × (P + {smoothing:g} × p₀) / (P + N + U + {smoothing:g})",
             "positive_percent_formula": "100 × P / (P + N + U)",
@@ -572,5 +632,6 @@ def methodology(db_path, min_reviews=10, smoothing=10):
                 {"title": "Тональность и проверка", "text": "Правила анализируют русскоязычный текст по предложениям. Их confidence не является вероятностью: без калибровки оно равно null, а результат требует ручной проверки. Непроверенные и неопределённые оценки исключены из рейтинга."},
                 {"title": "Рейтинг", "text": f"P — число положительных, N — отрицательных, U — нейтральных проверенных отзывов. p₀ — доля положительных во всём проверенном корпусе до фильтрации. Оценка сглажена к этому среднему с весом {smoothing:g}; при менее чем {min_reviews} отзывах место и оценка не публикуются."},
                 {"title": "Аспекты", "text": "Каждый отзыв учитывается не более одного раза по каждому аспекту. Сильная или слабая сторона публикуется только при минимум трёх подтверждениях соответствующей тональности, с контекстом и ссылками на отзывы."},
+                {"title": "Календарь", "text": "Календарные фильтры по дням, месячная динамика и отображаемые даты используют часовой пояс Europe/Moscow. Моменты публикации и сбора хранятся в UTC; временная зона исходной записи учитывается при импорте."},
                 {"title": "Ограничения", "text": "Отзывы не являются репрезентативным опросом студентов. Рейтинг отражает только доступный проверенный корпус, а не объективное качество образования. Достоверность по размеру выборки не гарантирует отсутствие систематического смещения."},
             ]}

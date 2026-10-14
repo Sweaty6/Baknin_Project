@@ -1,11 +1,29 @@
 """Invented test fixtures ONLY: none of these examples is a production corpus."""
 
 import json
+from pathlib import Path
 
 import pytest
 
 from baknin.nlp import ASPECT_LABELS, Analyzer, normalize_text
 from model_training import load_dataset, select_confidence_threshold, train
+
+
+def test_python_definitions_match_canonical_website_rules():
+    from baknin import nlp
+
+    path = Path(__file__).resolve().parent.parent / "website" / "data" / "rules.json"
+    canonical = json.loads(path.read_text(encoding="utf-8"))
+    assert nlp.RULES_VERSION == canonical["version"]
+    assert nlp.ASPECT_LABELS == canonical["aspect_labels"]
+    assert list(nlp.ASPECT_LABELS) == list(canonical["aspect_labels"])
+    assert {name: regex.pattern for name, regex in nlp._ASPECT_REGEX.items()} == canonical["aspect_patterns"]
+    assert nlp._POSITIVE.pattern == canonical["positive_pattern"]
+    assert nlp._NEGATIVE.pattern == canonical["negative_pattern"]
+    assert nlp._STOPWORDS == set(canonical["stopwords"])
+    assert {
+        name: "^(?:" + pattern + ")$" for name, pattern in nlp._ASPECT_PATTERNS.items()
+    } == canonical["aspect_patterns"]
 
 
 def test_normalization_retains_negations_and_is_deterministic():

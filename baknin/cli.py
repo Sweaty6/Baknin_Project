@@ -33,6 +33,8 @@ def parser():
     audit.add_argument("--actor", default="reviewer", help="Имя/идентификатор проверяющего")
     audit.add_argument("--note", default="", help="Обоснование ручной оценки")
     audit.add_argument("--page", type=int, default=1, help="Страница очереди ручной проверки")
+    audit.add_argument("--pending-aspects", action="store_true",
+                       help="Показать проверенные отзывы, аспекты которых ещё требуют проверки")
     for command in (init, importer, classifier, audit):
         command.add_argument("--db", default=argparse.SUPPRESS, help="Путь к SQLite базе")
     return result
@@ -57,8 +59,11 @@ def main(argv=None):
         elif args.review_id is None:
             if args.sentiment or args.aspects:
                 raise ValueError("Для ручной оценки нужен review_id")
-            result = list_reviews(args.db, {"needs_review": True}, page=args.page)
+            filters = {"pending_aspects": True} if args.pending_aspects else {"needs_review": True}
+            result = list_reviews(args.db, filters, page=args.page)
         else:
+            if args.pending_aspects:
+                raise ValueError("--pending-aspects используется только для просмотра очереди без review_id")
             if not args.sentiment:
                 raise ValueError("Для проверки нужен --sentiment")
             aspects = json.loads(Path(args.aspects).read_text(encoding="utf-8")) if args.aspects else None

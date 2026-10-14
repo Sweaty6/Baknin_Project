@@ -23,7 +23,7 @@ def test_clean_export_has_correct_base_paths_and_real_empty_state(tmp_path):
     assert (output / "universities/timiryazev/index.html").is_file()
     assert (output / "launch/index.html").is_file()
     analysis_html = (output / "analysis/index.html").read_text(encoding="utf-8")
-    assert "обрабатывается локально в вашем браузере" in analysis_html
+    assert "Анализ выполняется в вашем браузере" in analysis_html
     assert "Текст отправляется на сервер" not in analysis_html
     assert (output / ".nojekyll").is_file()
     assert not list(output.rglob("*.sqlite3"))

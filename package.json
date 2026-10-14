@@ -1,0 +1,17 @@
+{
+  "name": "baknin-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Russian agricultural university review website for GitHub Pages",
+  "scripts": {
+    "build": "node scripts/build_website.mjs",
+    "test": "node --test tests/js/*.test.mjs",
+    "preview": "node scripts/preview_website.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "nunjucks": "3.2.4"
+  }
+}

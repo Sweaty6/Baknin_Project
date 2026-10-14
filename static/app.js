@@ -162,6 +162,8 @@
         regionInitialized = true;
         const items = data.items || [];
         $('#university-count').textContent = `Найдено университетов: ${integer(items.length)}`;
+        const publicationNote = $('.results-top > span');
+        if (publicationNote && data.meta?.exported_at) publicationNote.textContent = `Публикация данных: ${date(data.meta.exported_at)}`;
         list.replaceChildren(...items.map(universityCard));
         if (!items.length) list.append(empty('Университеты не найдены', 'Попробуйте изменить название, регион или период отзывов.'));
         list.setAttribute('aria-busy', 'false');
@@ -498,6 +500,8 @@
       const rules = isRules(analyzer);
       info.replaceChildren(node('strong', '', rules ? 'Словарный анализ • требует проверки' : `Режим анализа: ${analyzer.engine || analyzer.model_version || 'модель'}`));
       info.append(node('p', '', rules ? 'Для текущего словарного режима точность на независимой выборке не подтверждена. Вместо вероятности показываются признаки и объяснение результата.' : `Версия: ${analyzer.model_version || analyzer.version || 'не указана'}. Показатели качества доступны только при наличии независимой проверки.`));
+      if (data.exported_at) info.append(node('p', '', `Публикация данных: ${date(data.exported_at)}.`));
+      if (data.timezone) info.append(node('p', '', 'Даты отзывов, фильтры периода и месяцы динамики используют время Москвы.'));
       const aspects = data.aspects || data.aspect_categories || [];
       const chips = $('#method-aspects');
       chips.replaceChildren();

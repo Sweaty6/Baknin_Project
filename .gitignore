@@ -15,3 +15,5 @@ test-results/
 playwright-report/
 _site/
 _preview/
+node_modules/
+.baknin-website-*/

@@ -1,4 +1,4 @@
-name: Tests
+name: Python toolkit tests
 on:
   push:
   pull_request:

@@ -23,23 +23,20 @@
         <span>АГРО<span class="brand-slash"> / </span>ОТЗЫВЫ<span class="brand-caption">Университет глазами студентов</span></span>
       </a>
       <nav class="main-nav" aria-label="Основная навигация">
-        <a href="/" {% if request.path == '/' or request.path.startswith('/universities/') %}aria-current="page"{% endif %}>Университеты</a>
+        <a href="/" {% if request.path == '/' or university_id is defined %}aria-current="page"{% endif %}>Университеты</a>
         <a href="/reviews" {% if request.path == '/reviews' %}aria-current="page"{% endif %}>Отзывы</a>
         <a href="/analysis" {% if request.path == '/analysis' %}aria-current="page"{% endif %}>Анализ текста</a>
         <a href="/methodology" {% if request.path == '/methodology' %}aria-current="page"{% endif %}>Методология</a>
       </nav>
     </div>
   </header>
-  {% if config.get('PAGE_MODE') == 'pages' %}
-  <aside class="pages-banner"><div class="container">Онлайн-версия: текст анализируется в вашем браузере. Каталог обновляется при публикации. <a href="{{ url_for('launch_page') }}">Как запустить полную версию →</a></div></aside>
-  {% endif %}
-  <main id="main">{% block content %}{% endblock %}</main>
+  <main id="main"><noscript><div class="container browser-note">Включите JavaScript в браузере, чтобы загрузить каталог, использовать фильтры и анализировать отзывы.</div></noscript>{% block content %}{% endblock %}</main>
   <footer class="site-footer">
     <div class="container footer-inner">
       <div><strong>АГРО / ОТЗЫВЫ</strong><p>Больше контекста для осознанного выбора.</p></div>
       <p class="footer-note">Автоматический анализ может ошибаться.<br>Читайте сами отзывы и проверяйте их источники.</p>
       <a class="text-link" href="/methodology">Принципы и ограничения <span aria-hidden="true">→</span></a>
-      <a class="text-link" href="{{ url_for('launch_page') }}">Инструкция запуска →</a>
+      <a class="text-link" href="{{ url_for('launch_page') }}">Как опубликовать сайт →</a>
     </div>
   </footer>
 </body>

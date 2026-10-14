@@ -1,6 +1,7 @@
 """Ephemeral test fixtures only: no review corpus is shipped or seeded."""
 import json
 import sqlite3
+import hashlib
 
 import pytest
 
@@ -24,7 +25,8 @@ def record(text="Отличные преподаватели", university_id="ti
     item = {"university_id": university_id, "text": text,
             "source": {"platform": "Test fixture", "url": "https://example.org/",
                        "terms_checked_at": "2025-03-01"},
-            "source_url": "https://example.org/reviews/1", "published_at": "2025-01-15",
+            "source_url": f"https://example.org/reviews/{university_id}/{hashlib.sha256(text.encode()).hexdigest()[:12]}",
+            "published_at": "2025-01-15",
             "collected_at": "2025-03-01", "verified": True,
             "display_allowed": True, "personal_data_removed": True}
     item.update(changes)
@@ -66,7 +68,7 @@ def test_import_deduplicates_normalization_and_keeps_provenance(database, tmp_pa
     assert stats == {"imported": 2, "duplicates": 1, "pending_moderation": 2}
     review = list_reviews(database, {"university_id": "timiryazev"})["items"][0]
     assert review["text"] == "Преподаватели хорошие!"
-    assert review["source_url"] == "https://example.org/reviews/1"
+    assert review["source_url"] == records[0]["source_url"]
     assert review["source"]["platform"] == "Test fixture"
     assert review["confidence"] is None and review["needs_review"] is True
 
@@ -78,6 +80,124 @@ def test_external_id_deduplicates_edited_source_post(database, tmp_path):
     ])
     assert stats["imported"] == 1 and stats["duplicates"] == 1
     assert list_reviews(database)["items"][0]["source_review_id"] == "external-123"
+
+
+def test_external_id_identity_ignores_renamed_platform_display_label(database, tmp_path):
+    import_records(database, tmp_path, [record("Оригинальный отзыв о преподавателях", source_review_id="post-123")])
+    renamed_source = {"platform": "Тестовая площадка", "url": "https://example.org/",
+                      "terms_checked_at": "2025-03-01"}
+    stats = import_records(database, tmp_path, [
+        record("Обновлённый отзыв о преподавателях", source_review_id="post-123", source=renamed_source)])
+    assert stats["duplicates"] == 1 and stats["imported"] == 0
+    original = list_reviews(database)["items"][0]
+    assert original["text"] == "Оригинальный отзыв о преподавателях"
+    assert original["source"]["platform"] == "Test fixture"
+    with pytest.raises(ValueError, match="другому вузу"):
+        import_records(database, tmp_path, [
+            record("Текст с неверной привязкой", "kubsau", source_review_id="post-123", source=renamed_source)])
+    assert list_reviews(database)["total"] == 1
+
+
+def test_edited_direct_permalink_does_not_inflate_rating(database, tmp_path):
+    source_url = "https://example.org/reviews/original-post"
+    stats = import_records(database, tmp_path, [
+        record("Хорошие преподаватели", source_url=source_url, sentiment="positive"),
+        record("Хорошие преподаватели, обновлённый отзыв", source_url=source_url, sentiment="positive"),
+    ])
+    assert stats["imported"] == 1 and stats["duplicates"] == 1
+    original = list_reviews(database)["items"][0]
+    assert original["text"] == "Хорошие преподаватели"
+    item = ranking(database, {"university_id": "timiryazev"}, min_reviews=2)[0]
+    assert item["eligible_reviews"] == 1 and item["rank"] is None
+    assert item["smoothed_score"] is None
+
+
+@pytest.mark.parametrize("external_id", [None, "physical-123"])
+def test_physical_post_conflicting_university_rolls_back_entire_import(database, tmp_path, external_id):
+    source_url = "https://example.org/reviews/physical-post"
+    import_records(database, tmp_path, [record("Хорошие преподаватели", source_url=source_url,
+                                             source_review_id=external_id)])
+    new_url = source_url if external_id is None else "https://example.org/changed-permalink"
+    new_source = {"platform": "A new fixture source", "url": "https://example.org/",
+                  "terms_checked_at": "2025-03-01"}
+    with pytest.raises(ValueError, match="Строка 2.*другому вузу"):
+        import_records(database, tmp_path, [
+            record("Другая публикация для другого вуза", "omgau", source=new_source),
+            record("Изменённый текст чужой публикации", "kubsau", source_url=new_url,
+                   source_review_id=external_id),
+        ])
+    with connect(database) as connection:
+        for table in ["reviews", "sources", "predictions", "review_audit"]:
+            assert connection.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0] == 1
+
+
+def test_physical_conflict_is_not_hidden_by_local_text_duplicate(database, tmp_path):
+    import_records(database, tmp_path, [
+        record("Оригинал для первого вуза", source_review_id="physical-123"),
+        record("Локальный текст второго вуза", "kubsau", source_review_id="other-456"),
+    ])
+    with pytest.raises(ValueError, match="другому вузу"):
+        import_records(database, tmp_path, [
+            record("Локальный текст второго вуза", "kubsau", source_review_id="physical-123")])
+    assert list_reviews(database)["total"] == 2
+
+
+def test_shared_listing_requires_distinct_explicit_post_ids(database, tmp_path):
+    shared_url = "https://example.org/reviews/listing"
+    stats = import_records(database, tmp_path, [
+        record("Первый отзыв о преподавателях", source_url=shared_url, source_review_id="post-a"),
+        record("Второй отзыв об общежитии", source_url=shared_url, source_review_id="post-b"),
+        record("Отзыв для другого вуза", "kubsau", source_url=shared_url, source_review_id="post-c"),
+    ])
+    assert stats["imported"] == 3
+    with pytest.raises(ValueError):
+        import_records(database, tmp_path, [record("Отзыв без идентификатора", source_url=shared_url)])
+    assert list_reviews(database)["total"] == 3
+
+
+def test_listing_with_two_known_posts_cannot_import_without_id(database, tmp_path):
+    shared_url = "https://example.org/reviews/one-university-listing"
+    import_records(database, tmp_path, [
+        record("Первый отзыв", source_url=shared_url, source_review_id="post-a"),
+        record("Второй отзыв", source_url=shared_url, source_review_id="post-b"),
+    ])
+    with pytest.raises(ValueError, match="требуется source_review_id"):
+        import_records(database, tmp_path, [record("Неизвестный третий отзыв", source_url=shared_url)])
+
+
+def test_explicit_id_cannot_turn_existing_direct_post_into_another_review(database, tmp_path):
+    source_url = "https://example.org/reviews/original-post"
+    import_records(database, tmp_path, [record("Оригинальный отзыв", source_url=source_url)])
+    stats = import_records(database, tmp_path, [record("Переиздание оригинального отзыва", source_url=source_url,
+                                                     source_review_id="newly-added-id")])
+    assert stats["duplicates"] == 1 and stats["imported"] == 0
+    assert list_reviews(database)["items"][0]["text"] == "Оригинальный отзыв"
+
+
+def test_concurrent_imports_cannot_assign_one_post_to_two_universities(database, tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Barrier
+
+    barrier = Barrier(2)
+    paths = []
+    for university_id in ["timiryazev", "kubsau"]:
+        path = tmp_path / f"{university_id}.jsonl"
+        path.write_text(json.dumps(record(f"Отзыв о {university_id}", university_id,
+                                         source_review_id="one-physical-post")), encoding="utf-8")
+        paths.append(path)
+
+    def attempt(path):
+        barrier.wait(timeout=10)
+        try:
+            return import_reviews(database, path, Analyzer())
+        except ValueError as exc:
+            return str(exc)
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(attempt, paths))
+    assert sum(isinstance(result, dict) for result in results) == 1
+    assert sum(isinstance(result, str) and "другому вузу" in result for result in results) == 1
+    assert list_reviews(database)["total"] == 1
 
 
 def test_invalid_line_rolls_back_reviews_sources_predictions_and_audit(database, tmp_path):
@@ -123,6 +243,40 @@ def test_filter_boundaries_are_controlled(database):
         list_reviews(database, {"source_id": 10**30})
     assert list_reviews(database, {"date_to": "9999-12-31"})["total"] == 0
     assert ranking(database, {"q": "Краснодар"})[0]["id"] == "kubsau"
+
+
+def test_calendar_filters_and_months_use_the_displayed_moscow_day(database, tmp_path):
+    import_records(database, tmp_path, [
+        record("Последняя секунда января по Москве", published_at="2025-01-31T20:59:59Z", sentiment="neutral"),
+        record("Первая секунда февраля по Москве", published_at="2025-01-31T21:00:00Z", sentiment="positive"),
+        record("Последняя секунда первого февраля", published_at="2025-02-01T20:59:59Z", sentiment="negative"),
+        record("Первая секунда второго февраля", published_at="2025-02-01T21:00:00Z", sentiment="neutral"),
+        record("Тот же момент с исходной временной зоной", published_at="2025-02-01T00:00:00+03:00", sentiment="positive"),
+    ])
+    february_first = list_reviews(database, {"date_from": "2025-02-01", "date_to": "2025-02-01"})
+    assert february_first["total"] == 3
+    assert {item["text"] for item in february_first["items"]} == {
+        "Первая секунда февраля по Москве", "Последняя секунда первого февраля",
+        "Тот же момент с исходной временной зоной"}
+    assert list_reviews(database, {"date_to": "2025-01-31"})["total"] == 1
+    assert list_reviews(database, {"date_from": "2025-02-01"})["total"] == 4
+    item = ranking(database, {"date_from": "2025-02-01", "date_to": "2025-02-01", "university_id": "timiryazev"}, min_reviews=1)[0]
+    assert item["eligible_reviews"] == 3 and item["positive_percent"] == pytest.approx(200 / 3)
+    # Explicit timestamps still select exact instants, not local calendar days.
+    same_instant = list_reviews(database, {"date_from": "2025-01-31T21:00:00Z", "date_to": "2025-01-31T21:00:00Z"})
+    assert same_instant["total"] == 2
+    assert all(item["published_at"] == "2025-01-31T21:00:00Z" for item in same_instant["items"])
+    detail = university_detail(database, "timiryazev")
+    assert [(point["month"], point["total"]) for point in detail["dynamics"]] == [("2025-01", 1), ("2025-02", 4)]
+    assert methodology(database)["timezone"] == "Europe/Moscow"
+
+
+def test_calendar_uses_historical_moscow_offset(database, tmp_path):
+    # Moscow used UTC+04 in January 2012: a fixed modern UTC+03 offset is wrong.
+    import_records(database, tmp_path, [record("Исторический отзыв в начале февраля", published_at="2012-01-31T20:00:00Z", sentiment="positive")])
+    assert list_reviews(database, {"date_from": "2012-02-01", "date_to": "2012-02-01"})["total"] == 1
+    assert list_reviews(database, {"date_to": "2012-01-31"})["total"] == 0
+    assert university_detail(database, "timiryazev")["dynamics"][0]["month"] == "2012-02"
 
 
 def test_hidden_text_and_snippets_do_not_leak_even_via_search(database, tmp_path):
@@ -207,3 +361,20 @@ def test_cli_import_option_and_moderation_queue(database, tmp_path, capsys):
     assert json.loads(capsys.readouterr().out)["pending_moderation"] == 1
     assert main(["--db", str(database), "audit", "1", "--sentiment", "positive", "--actor", "tester"]) == 0
     assert json.loads(capsys.readouterr().out)["approved"] is True
+
+
+def test_cli_separate_pending_aspect_queue_is_safe_and_actionable(database, tmp_path, capsys):
+    from baknin.cli import main
+
+    import_records(database, tmp_path, [record("Хорошие преподаватели", sentiment="positive", display_allowed=False),
+                                      record("Плохое общежитие")])
+    assert main(["audit", "--db", str(database)]) == 0
+    assert json.loads(capsys.readouterr().out)["items"][0]["id"] == 2
+    assert main(["audit", "--db", str(database), "--pending-aspects"]) == 0
+    queued = json.loads(capsys.readouterr().out)
+    assert queued["total"] == 1 and queued["items"][0]["id"] == 1
+    assert queued["items"][0]["text"] is None and queued["items"][0]["aspects"][0]["context"] is None
+    moderate_review(database, 1, "positive", aspects=[
+        {"aspect": "teaching", "sentiment": "positive", "context": "Хорошие преподаватели"}])
+    assert main(["audit", "--db", str(database), "--pending-aspects"]) == 0
+    assert json.loads(capsys.readouterr().out)["total"] == 0
