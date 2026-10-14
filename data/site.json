@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "exported_at": "2026-10-14T06:46:44Z",
+  "exported_at": "2026-10-14T06:57:51Z",
   "base_path": "/Baknin_Project/",
   "rules": {
     "version": "ru-aspect-rules-1",
@@ -257,7 +257,7 @@
       "smoothing": 10,
       "total": 5,
       "parameter_status": "Пилотные параметры; калибровка на реальном корпусе ещё не выполнена.",
-      "exported_at": "2026-10-14T06:46:44Z"
+      "exported_at": "2026-10-14T06:57:51Z"
     }
   },
   "reviews": [],
@@ -331,7 +331,7 @@
         "server_api_available": false,
         "deployment": "github_pages",
         "snapshot": true,
-        "exported_at": "2026-10-14T06:46:44Z",
+        "exported_at": "2026-10-14T06:57:51Z",
         "aspects": [
           {
             "id": "teaching",
@@ -455,7 +455,7 @@
         "server_api_available": false,
         "deployment": "github_pages",
         "snapshot": true,
-        "exported_at": "2026-10-14T06:46:44Z",
+        "exported_at": "2026-10-14T06:57:51Z",
         "aspects": [
           {
             "id": "teaching",
@@ -579,7 +579,7 @@
         "server_api_available": false,
         "deployment": "github_pages",
         "snapshot": true,
-        "exported_at": "2026-10-14T06:46:44Z",
+        "exported_at": "2026-10-14T06:57:51Z",
         "aspects": [
           {
             "id": "teaching",
@@ -703,7 +703,7 @@
         "server_api_available": false,
         "deployment": "github_pages",
         "snapshot": true,
-        "exported_at": "2026-10-14T06:46:44Z",
+        "exported_at": "2026-10-14T06:57:51Z",
         "aspects": [
           {
             "id": "teaching",
@@ -827,7 +827,7 @@
         "server_api_available": false,
         "deployment": "github_pages",
         "snapshot": true,
-        "exported_at": "2026-10-14T06:46:44Z",
+        "exported_at": "2026-10-14T06:57:51Z",
         "aspects": [
           {
             "id": "teaching",
@@ -918,7 +918,7 @@
     "server_api_available": false,
     "deployment": "github_pages",
     "snapshot": true,
-    "exported_at": "2026-10-14T06:46:44Z",
+    "exported_at": "2026-10-14T06:57:51Z",
     "aspects": [
       {
         "id": "teaching",
@@ -981,7 +981,7 @@
     "ml_trained": false,
     "model_diagnostic": null,
     "deployment": "github_pages",
-    "exported_at": "2026-10-14T06:46:44Z",
+    "exported_at": "2026-10-14T06:57:51Z",
     "limitation": "Публичные данные обновляются через GitHub. Анализ работает локально; обученная модель не подключена."
   }
 }
