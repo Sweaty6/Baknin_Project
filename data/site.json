@@ -1,682 +1,7 @@
 {
   "format": 1,
+  "exported_at": "2026-10-14T06:46:44Z",
   "base_path": "/Baknin_Project/",
-  "exported_at": "2026-10-13T11:08:16.116521+00:00",
-  "universities": {
-    "items": [
-      {
-        "baseline_positive_fraction": null,
-        "city": "Персиановский",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Донской государственный аграрный университет",
-        "id": "dongau",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://www.dongau.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Ростовская область",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "Донской ГАУ",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      },
-      {
-        "baseline_positive_fraction": null,
-        "city": "Казань",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Казанский государственный аграрный университет",
-        "id": "kazgau",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://kazgau.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Республика Татарстан",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "Казанский ГАУ",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      },
-      {
-        "baseline_positive_fraction": null,
-        "city": "Краснодар",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Кубанский государственный аграрный университет имени И. Т. Трубилина",
-        "id": "kubsau",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://kubsau.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Краснодарский край",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "Кубанский ГАУ",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      },
-      {
-        "baseline_positive_fraction": null,
-        "city": "Омск",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Омский государственный аграрный университет имени П. А. Столыпина",
-        "id": "omgau",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://www.omgau.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Омская область",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "Омский ГАУ",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      },
-      {
-        "baseline_positive_fraction": null,
-        "city": "Москва",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Российский государственный аграрный университет — МСХА имени К. А. Тимирязева",
-        "id": "timiryazev",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://www.timacad.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Москва",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "РГАУ-МСХА",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      }
-    ],
-    "meta": {
-      "min_reviews": 10,
-      "parameter_status": "Пилотные параметры; калибровка на корпусе ещё не выполнена.",
-      "smoothing": 10.0,
-      "total": 5
-    },
-    "regions": [
-      "Краснодарский край",
-      "Москва",
-      "Омская область",
-      "Республика Татарстан",
-      "Ростовская область"
-    ]
-  },
-  "details": {
-    "dongau": {
-      "dynamics": [],
-      "methodology": {
-        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
-        "counts": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        },
-        "last_updated": null,
-        "min_reviews": 10,
-        "min_topic_reviews": 3,
-        "models": [],
-        "positive_percent_formula": "100 × P / (P + N + U)",
-        "requires_corpus": true,
-        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
-        "sections": [
-          {
-            "text": "В базу импортируются только реальные отзывы, проверенные человеком, со ссылкой на публикацию и датами публикации, сбора и проверки условий площадки. Тексты без разрешения на показ скрыты.",
-            "title": "Источники"
-          },
-          {
-            "text": "Правила анализируют русскоязычный текст по предложениям. Их confidence не является вероятностью: без калибровки оно равно null, а результат требует ручной проверки. Непроверенные и неопределённые оценки исключены из рейтинга.",
-            "title": "Тональность и проверка"
-          },
-          {
-            "text": "P — число положительных, N — отрицательных, U — нейтральных проверенных отзывов. p₀ — доля положительных во всём проверенном корпусе до фильтрации. Оценка сглажена к этому среднему с весом 10; при менее чем 10 отзывах место и оценка не публикуются.",
-            "title": "Рейтинг"
-          },
-          {
-            "text": "Каждый отзыв учитывается не более одного раза по каждому аспекту. Сильная или слабая сторона публикуется только при минимум трёх подтверждениях соответствующей тональности, с контекстом и ссылками на отзывы.",
-            "title": "Аспекты"
-          },
-          {
-            "text": "Отзывы не являются репрезентативным опросом студентов. Рейтинг отражает только доступный проверенный корпус, а не объективное качество образования. Достоверность по размеру выборки не гарантирует отсутствие систематического смещения.",
-            "title": "Ограничения"
-          }
-        ],
-        "smoothing": 10.0,
-        "sources": [],
-        "stats": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        }
-      },
-      "recent_reviews": [],
-      "sources": [],
-      "topics": [],
-      "university": {
-        "baseline_positive_fraction": null,
-        "city": "Персиановский",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Донской государственный аграрный университет",
-        "id": "dongau",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://www.dongau.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Ростовская область",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "Донской ГАУ",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      }
-    },
-    "kazgau": {
-      "dynamics": [],
-      "methodology": {
-        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
-        "counts": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        },
-        "last_updated": null,
-        "min_reviews": 10,
-        "min_topic_reviews": 3,
-        "models": [],
-        "positive_percent_formula": "100 × P / (P + N + U)",
-        "requires_corpus": true,
-        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
-        "sections": [
-          {
-            "text": "В базу импортируются только реальные отзывы, проверенные человеком, со ссылкой на публикацию и датами публикации, сбора и проверки условий площадки. Тексты без разрешения на показ скрыты.",
-            "title": "Источники"
-          },
-          {
-            "text": "Правила анализируют русскоязычный текст по предложениям. Их confidence не является вероятностью: без калибровки оно равно null, а результат требует ручной проверки. Непроверенные и неопределённые оценки исключены из рейтинга.",
-            "title": "Тональность и проверка"
-          },
-          {
-            "text": "P — число положительных, N — отрицательных, U — нейтральных проверенных отзывов. p₀ — доля положительных во всём проверенном корпусе до фильтрации. Оценка сглажена к этому среднему с весом 10; при менее чем 10 отзывах место и оценка не публикуются.",
-            "title": "Рейтинг"
-          },
-          {
-            "text": "Каждый отзыв учитывается не более одного раза по каждому аспекту. Сильная или слабая сторона публикуется только при минимум трёх подтверждениях соответствующей тональности, с контекстом и ссылками на отзывы.",
-            "title": "Аспекты"
-          },
-          {
-            "text": "Отзывы не являются репрезентативным опросом студентов. Рейтинг отражает только доступный проверенный корпус, а не объективное качество образования. Достоверность по размеру выборки не гарантирует отсутствие систематического смещения.",
-            "title": "Ограничения"
-          }
-        ],
-        "smoothing": 10.0,
-        "sources": [],
-        "stats": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        }
-      },
-      "recent_reviews": [],
-      "sources": [],
-      "topics": [],
-      "university": {
-        "baseline_positive_fraction": null,
-        "city": "Казань",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Казанский государственный аграрный университет",
-        "id": "kazgau",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://kazgau.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Республика Татарстан",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "Казанский ГАУ",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      }
-    },
-    "kubsau": {
-      "dynamics": [],
-      "methodology": {
-        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
-        "counts": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        },
-        "last_updated": null,
-        "min_reviews": 10,
-        "min_topic_reviews": 3,
-        "models": [],
-        "positive_percent_formula": "100 × P / (P + N + U)",
-        "requires_corpus": true,
-        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
-        "sections": [
-          {
-            "text": "В базу импортируются только реальные отзывы, проверенные человеком, со ссылкой на публикацию и датами публикации, сбора и проверки условий площадки. Тексты без разрешения на показ скрыты.",
-            "title": "Источники"
-          },
-          {
-            "text": "Правила анализируют русскоязычный текст по предложениям. Их confidence не является вероятностью: без калибровки оно равно null, а результат требует ручной проверки. Непроверенные и неопределённые оценки исключены из рейтинга.",
-            "title": "Тональность и проверка"
-          },
-          {
-            "text": "P — число положительных, N — отрицательных, U — нейтральных проверенных отзывов. p₀ — доля положительных во всём проверенном корпусе до фильтрации. Оценка сглажена к этому среднему с весом 10; при менее чем 10 отзывах место и оценка не публикуются.",
-            "title": "Рейтинг"
-          },
-          {
-            "text": "Каждый отзыв учитывается не более одного раза по каждому аспекту. Сильная или слабая сторона публикуется только при минимум трёх подтверждениях соответствующей тональности, с контекстом и ссылками на отзывы.",
-            "title": "Аспекты"
-          },
-          {
-            "text": "Отзывы не являются репрезентативным опросом студентов. Рейтинг отражает только доступный проверенный корпус, а не объективное качество образования. Достоверность по размеру выборки не гарантирует отсутствие систематического смещения.",
-            "title": "Ограничения"
-          }
-        ],
-        "smoothing": 10.0,
-        "sources": [],
-        "stats": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        }
-      },
-      "recent_reviews": [],
-      "sources": [],
-      "topics": [],
-      "university": {
-        "baseline_positive_fraction": null,
-        "city": "Краснодар",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Кубанский государственный аграрный университет имени И. Т. Трубилина",
-        "id": "kubsau",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://kubsau.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Краснодарский край",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "Кубанский ГАУ",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      }
-    },
-    "omgau": {
-      "dynamics": [],
-      "methodology": {
-        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
-        "counts": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        },
-        "last_updated": null,
-        "min_reviews": 10,
-        "min_topic_reviews": 3,
-        "models": [],
-        "positive_percent_formula": "100 × P / (P + N + U)",
-        "requires_corpus": true,
-        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
-        "sections": [
-          {
-            "text": "В базу импортируются только реальные отзывы, проверенные человеком, со ссылкой на публикацию и датами публикации, сбора и проверки условий площадки. Тексты без разрешения на показ скрыты.",
-            "title": "Источники"
-          },
-          {
-            "text": "Правила анализируют русскоязычный текст по предложениям. Их confidence не является вероятностью: без калибровки оно равно null, а результат требует ручной проверки. Непроверенные и неопределённые оценки исключены из рейтинга.",
-            "title": "Тональность и проверка"
-          },
-          {
-            "text": "P — число положительных, N — отрицательных, U — нейтральных проверенных отзывов. p₀ — доля положительных во всём проверенном корпусе до фильтрации. Оценка сглажена к этому среднему с весом 10; при менее чем 10 отзывах место и оценка не публикуются.",
-            "title": "Рейтинг"
-          },
-          {
-            "text": "Каждый отзыв учитывается не более одного раза по каждому аспекту. Сильная или слабая сторона публикуется только при минимум трёх подтверждениях соответствующей тональности, с контекстом и ссылками на отзывы.",
-            "title": "Аспекты"
-          },
-          {
-            "text": "Отзывы не являются репрезентативным опросом студентов. Рейтинг отражает только доступный проверенный корпус, а не объективное качество образования. Достоверность по размеру выборки не гарантирует отсутствие систематического смещения.",
-            "title": "Ограничения"
-          }
-        ],
-        "smoothing": 10.0,
-        "sources": [],
-        "stats": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        }
-      },
-      "recent_reviews": [],
-      "sources": [],
-      "topics": [],
-      "university": {
-        "baseline_positive_fraction": null,
-        "city": "Омск",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Омский государственный аграрный университет имени П. А. Столыпина",
-        "id": "omgau",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://www.omgau.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Омская область",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "Омский ГАУ",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      }
-    },
-    "timiryazev": {
-      "dynamics": [],
-      "methodology": {
-        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
-        "counts": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        },
-        "last_updated": null,
-        "min_reviews": 10,
-        "min_topic_reviews": 3,
-        "models": [],
-        "positive_percent_formula": "100 × P / (P + N + U)",
-        "requires_corpus": true,
-        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
-        "sections": [
-          {
-            "text": "В базу импортируются только реальные отзывы, проверенные человеком, со ссылкой на публикацию и датами публикации, сбора и проверки условий площадки. Тексты без разрешения на показ скрыты.",
-            "title": "Источники"
-          },
-          {
-            "text": "Правила анализируют русскоязычный текст по предложениям. Их confidence не является вероятностью: без калибровки оно равно null, а результат требует ручной проверки. Непроверенные и неопределённые оценки исключены из рейтинга.",
-            "title": "Тональность и проверка"
-          },
-          {
-            "text": "P — число положительных, N — отрицательных, U — нейтральных проверенных отзывов. p₀ — доля положительных во всём проверенном корпусе до фильтрации. Оценка сглажена к этому среднему с весом 10; при менее чем 10 отзывах место и оценка не публикуются.",
-            "title": "Рейтинг"
-          },
-          {
-            "text": "Каждый отзыв учитывается не более одного раза по каждому аспекту. Сильная или слабая сторона публикуется только при минимум трёх подтверждениях соответствующей тональности, с контекстом и ссылками на отзывы.",
-            "title": "Аспекты"
-          },
-          {
-            "text": "Отзывы не являются репрезентативным опросом студентов. Рейтинг отражает только доступный проверенный корпус, а не объективное качество образования. Достоверность по размеру выборки не гарантирует отсутствие систематического смещения.",
-            "title": "Ограничения"
-          }
-        ],
-        "smoothing": 10.0,
-        "sources": [],
-        "stats": {
-          "approved": 0,
-          "pending_moderation": 0,
-          "reviews": 0,
-          "sources": 0,
-          "universities": 5
-        }
-      },
-      "recent_reviews": [],
-      "sources": [],
-      "topics": [],
-      "university": {
-        "baseline_positive_fraction": null,
-        "city": "Москва",
-        "eligible": false,
-        "eligible_reviews": 0,
-        "full_name": "Российский государственный аграрный университет — МСХА имени К. А. Тимирязева",
-        "id": "timiryazev",
-        "last_collected_at": null,
-        "negative": 0,
-        "neutral": 0,
-        "official_url": "https://www.timacad.ru/",
-        "official_url_live_verified": 0,
-        "pending_percent": null,
-        "pending_reviews": 0,
-        "period_end": null,
-        "period_start": null,
-        "positive": 0,
-        "positive_percent": null,
-        "rank": null,
-        "region": "Москва",
-        "reliability": "insufficient",
-        "reviews_total": 0,
-        "short_name": "РГАУ-МСХА",
-        "small_sample": true,
-        "smoothed_score": null,
-        "status": "no_data",
-        "strengths": [],
-        "weaknesses": []
-      }
-    }
-  },
-  "reviews": [],
-  "methodology": {
-    "aspects": [
-      {
-        "id": "teaching",
-        "label": "Преподавание и учебный процесс"
-      },
-      {
-        "id": "career",
-        "label": "Практика и трудоустройство"
-      },
-      {
-        "id": "dormitory",
-        "label": "Общежитие"
-      },
-      {
-        "id": "infrastructure",
-        "label": "Инфраструктура"
-      },
-      {
-        "id": "administration",
-        "label": "Администрация"
-      },
-      {
-        "id": "student_life",
-        "label": "Студенческая жизнь"
-      },
-      {
-        "id": "finance",
-        "label": "Стоимость и финансы"
-      }
-    ],
-    "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
-    "counts": {
-      "approved": 0,
-      "pending_moderation": 0,
-      "reviews": 0,
-      "sources": 0,
-      "universities": 5
-    },
-    "engine": "browser_rules",
-    "last_updated": null,
-    "metrics": null,
-    "metrics_available": false,
-    "min_reviews": 10,
-    "min_topic_reviews": 3,
-    "model_version": "ru-aspect-rules-1-browser",
-    "models": [],
-    "parameter_status": "Пилотные значения, не подобраны на реальном корпусе.",
-    "positive_percent_formula": "100 × P / (P + N + U)",
-    "requires_corpus": true,
-    "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
-    "sections": [
-      {
-        "text": "В базу импортируются только реальные отзывы, проверенные человеком, со ссылкой на публикацию и датами публикации, сбора и проверки условий площадки. Тексты без разрешения на показ скрыты.",
-        "title": "Источники"
-      },
-      {
-        "text": "Правила анализируют русскоязычный текст по предложениям. Их confidence не является вероятностью: без калибровки оно равно null, а результат требует ручной проверки. Непроверенные и неопределённые оценки исключены из рейтинга.",
-        "title": "Тональность и проверка"
-      },
-      {
-        "text": "P — число положительных, N — отрицательных, U — нейтральных проверенных отзывов. p₀ — доля положительных во всём проверенном корпусе до фильтрации. Оценка сглажена к этому среднему с весом 10; при менее чем 10 отзывах место и оценка не публикуются.",
-        "title": "Рейтинг"
-      },
-      {
-        "text": "Каждый отзыв учитывается не более одного раза по каждому аспекту. Сильная или слабая сторона публикуется только при минимум трёх подтверждениях соответствующей тональности, с контекстом и ссылками на отзывы.",
-        "title": "Аспекты"
-      },
-      {
-        "text": "Отзывы не являются репрезентативным опросом студентов. Рейтинг отражает только доступный проверенный корпус, а не объективное качество образования. Достоверность по размеру выборки не гарантирует отсутствие систематического смещения.",
-        "title": "Ограничения"
-      }
-    ],
-    "smoothing": 10.0,
-    "sources": [],
-    "stats": {
-      "approved": 0,
-      "pending_moderation": 0,
-      "reviews": 0,
-      "sources": 0,
-      "universities": 5
-    },
-    "analysis_location": "browser",
-    "server_api_available": false
-  },
-  "health": {
-    "database": "ready",
-    "engine": "rules",
-    "limitation": "Реальные отзывы и оценка качества модели требуют отдельного корпуса.",
-    "ml_trained": false,
-    "model": "ready",
-    "model_diagnostic": null,
-    "model_version": "ru-aspect-rules-1",
-    "status": "ok"
-  },
   "rules": {
     "version": "ru-aspect-rules-1",
     "aspect_labels": {
@@ -771,5 +96,892 @@
       "этот",
       "я"
     ]
+  },
+  "universities": {
+    "items": [
+      {
+        "id": "dongau",
+        "full_name": "Донской государственный аграрный университет",
+        "short_name": "Донской ГАУ",
+        "city": "Персиановский",
+        "region": "Ростовская область",
+        "official_url": "https://www.dongau.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      {
+        "id": "kazgau",
+        "full_name": "Казанский государственный аграрный университет",
+        "short_name": "Казанский ГАУ",
+        "city": "Казань",
+        "region": "Республика Татарстан",
+        "official_url": "https://kazgau.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      {
+        "id": "kubsau",
+        "full_name": "Кубанский государственный аграрный университет имени И. Т. Трубилина",
+        "short_name": "Кубанский ГАУ",
+        "city": "Краснодар",
+        "region": "Краснодарский край",
+        "official_url": "https://kubsau.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      {
+        "id": "omgau",
+        "full_name": "Омский государственный аграрный университет имени П. А. Столыпина",
+        "short_name": "Омский ГАУ",
+        "city": "Омск",
+        "region": "Омская область",
+        "official_url": "https://www.omgau.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      {
+        "id": "timiryazev",
+        "full_name": "Российский государственный аграрный университет — МСХА имени К. А. Тимирязева",
+        "short_name": "РГАУ-МСХА",
+        "city": "Москва",
+        "region": "Москва",
+        "official_url": "https://www.timacad.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      }
+    ],
+    "regions": [
+      "Краснодарский край",
+      "Москва",
+      "Омская область",
+      "Республика Татарстан",
+      "Ростовская область"
+    ],
+    "meta": {
+      "min_reviews": 10,
+      "smoothing": 10,
+      "total": 5,
+      "parameter_status": "Пилотные параметры; калибровка на реальном корпусе ещё не выполнена.",
+      "exported_at": "2026-10-14T06:46:44Z"
+    }
+  },
+  "reviews": [],
+  "details": {
+    "dongau": {
+      "university": {
+        "id": "dongau",
+        "full_name": "Донской государственный аграрный университет",
+        "short_name": "Донской ГАУ",
+        "city": "Персиановский",
+        "region": "Ростовская область",
+        "official_url": "https://www.dongau.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      "dynamics": [],
+      "topics": [],
+      "sources": [],
+      "recent_reviews": [],
+      "methodology": {
+        "version": "public-data-v1",
+        "timezone": "Europe/Moscow",
+        "counts": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "stats": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "sources": [],
+        "last_updated": null,
+        "requires_corpus": true,
+        "models": [],
+        "min_reviews": 10,
+        "smoothing": 10,
+        "min_topic_reviews": 3,
+        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
+        "positive_percent_formula": "100 × P / (P + N + U)",
+        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
+        "parameter_status": "Пилотные параметры; калибровка на реальном корпусе ещё не выполнена.",
+        "engine": "browser_rules",
+        "model_version": "ru-aspect-rules-1-browser",
+        "metrics_available": false,
+        "metrics": null,
+        "server_api_available": false,
+        "deployment": "github_pages",
+        "snapshot": true,
+        "exported_at": "2026-10-14T06:46:44Z",
+        "aspects": [
+          {
+            "id": "teaching",
+            "label": "Преподавание и учебный процесс"
+          },
+          {
+            "id": "career",
+            "label": "Практика и трудоустройство"
+          },
+          {
+            "id": "dormitory",
+            "label": "Общежитие"
+          },
+          {
+            "id": "infrastructure",
+            "label": "Инфраструктура"
+          },
+          {
+            "id": "administration",
+            "label": "Администрация"
+          },
+          {
+            "id": "student_life",
+            "label": "Студенческая жизнь"
+          },
+          {
+            "id": "finance",
+            "label": "Стоимость и финансы"
+          }
+        ],
+        "sections": [
+          {
+            "title": "Источники",
+            "text": "Публикуются только реальные отзывы с вручную проверенными источником, принадлежностью вузу и правом показа. Персональные данные удалены; тексты без разрешения заранее заменены на null."
+          },
+          {
+            "title": "Тональность и проверка",
+            "text": "Метки корпуса проверяет человек. В рейтинг входят только approved=true. Словарный анализ нового текста выполняется локально в браузере, не имеет калиброванной уверенности и требует ручной проверки."
+          },
+          {
+            "title": "Рейтинг",
+            "text": "P — положительные, N — отрицательные, U — нейтральные проверенные отзывы. Среднее p₀ считается до фильтров. Вес сглаживания — 10; при менее чем 10 отзывах место и оценка не публикуются."
+          },
+          {
+            "title": "Аспекты",
+            "text": "Проверенная тема учитывается один раз на отзыв. Сильная или слабая сторона требует не менее трёх подтверждений соответствующей тональности. Непроверенные темы исключаются."
+          },
+          {
+            "title": "Ограничения",
+            "text": "Корпус пока не содержит реальных отзывов, если показано пустое состояние. Отзывы не являются репрезентативным опросом и не устанавливают объективное качество образования; размер выборки не устраняет систематическое смещение."
+          }
+        ]
+      }
+    },
+    "kazgau": {
+      "university": {
+        "id": "kazgau",
+        "full_name": "Казанский государственный аграрный университет",
+        "short_name": "Казанский ГАУ",
+        "city": "Казань",
+        "region": "Республика Татарстан",
+        "official_url": "https://kazgau.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      "dynamics": [],
+      "topics": [],
+      "sources": [],
+      "recent_reviews": [],
+      "methodology": {
+        "version": "public-data-v1",
+        "timezone": "Europe/Moscow",
+        "counts": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "stats": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "sources": [],
+        "last_updated": null,
+        "requires_corpus": true,
+        "models": [],
+        "min_reviews": 10,
+        "smoothing": 10,
+        "min_topic_reviews": 3,
+        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
+        "positive_percent_formula": "100 × P / (P + N + U)",
+        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
+        "parameter_status": "Пилотные параметры; калибровка на реальном корпусе ещё не выполнена.",
+        "engine": "browser_rules",
+        "model_version": "ru-aspect-rules-1-browser",
+        "metrics_available": false,
+        "metrics": null,
+        "server_api_available": false,
+        "deployment": "github_pages",
+        "snapshot": true,
+        "exported_at": "2026-10-14T06:46:44Z",
+        "aspects": [
+          {
+            "id": "teaching",
+            "label": "Преподавание и учебный процесс"
+          },
+          {
+            "id": "career",
+            "label": "Практика и трудоустройство"
+          },
+          {
+            "id": "dormitory",
+            "label": "Общежитие"
+          },
+          {
+            "id": "infrastructure",
+            "label": "Инфраструктура"
+          },
+          {
+            "id": "administration",
+            "label": "Администрация"
+          },
+          {
+            "id": "student_life",
+            "label": "Студенческая жизнь"
+          },
+          {
+            "id": "finance",
+            "label": "Стоимость и финансы"
+          }
+        ],
+        "sections": [
+          {
+            "title": "Источники",
+            "text": "Публикуются только реальные отзывы с вручную проверенными источником, принадлежностью вузу и правом показа. Персональные данные удалены; тексты без разрешения заранее заменены на null."
+          },
+          {
+            "title": "Тональность и проверка",
+            "text": "Метки корпуса проверяет человек. В рейтинг входят только approved=true. Словарный анализ нового текста выполняется локально в браузере, не имеет калиброванной уверенности и требует ручной проверки."
+          },
+          {
+            "title": "Рейтинг",
+            "text": "P — положительные, N — отрицательные, U — нейтральные проверенные отзывы. Среднее p₀ считается до фильтров. Вес сглаживания — 10; при менее чем 10 отзывах место и оценка не публикуются."
+          },
+          {
+            "title": "Аспекты",
+            "text": "Проверенная тема учитывается один раз на отзыв. Сильная или слабая сторона требует не менее трёх подтверждений соответствующей тональности. Непроверенные темы исключаются."
+          },
+          {
+            "title": "Ограничения",
+            "text": "Корпус пока не содержит реальных отзывов, если показано пустое состояние. Отзывы не являются репрезентативным опросом и не устанавливают объективное качество образования; размер выборки не устраняет систематическое смещение."
+          }
+        ]
+      }
+    },
+    "kubsau": {
+      "university": {
+        "id": "kubsau",
+        "full_name": "Кубанский государственный аграрный университет имени И. Т. Трубилина",
+        "short_name": "Кубанский ГАУ",
+        "city": "Краснодар",
+        "region": "Краснодарский край",
+        "official_url": "https://kubsau.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      "dynamics": [],
+      "topics": [],
+      "sources": [],
+      "recent_reviews": [],
+      "methodology": {
+        "version": "public-data-v1",
+        "timezone": "Europe/Moscow",
+        "counts": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "stats": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "sources": [],
+        "last_updated": null,
+        "requires_corpus": true,
+        "models": [],
+        "min_reviews": 10,
+        "smoothing": 10,
+        "min_topic_reviews": 3,
+        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
+        "positive_percent_formula": "100 × P / (P + N + U)",
+        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
+        "parameter_status": "Пилотные параметры; калибровка на реальном корпусе ещё не выполнена.",
+        "engine": "browser_rules",
+        "model_version": "ru-aspect-rules-1-browser",
+        "metrics_available": false,
+        "metrics": null,
+        "server_api_available": false,
+        "deployment": "github_pages",
+        "snapshot": true,
+        "exported_at": "2026-10-14T06:46:44Z",
+        "aspects": [
+          {
+            "id": "teaching",
+            "label": "Преподавание и учебный процесс"
+          },
+          {
+            "id": "career",
+            "label": "Практика и трудоустройство"
+          },
+          {
+            "id": "dormitory",
+            "label": "Общежитие"
+          },
+          {
+            "id": "infrastructure",
+            "label": "Инфраструктура"
+          },
+          {
+            "id": "administration",
+            "label": "Администрация"
+          },
+          {
+            "id": "student_life",
+            "label": "Студенческая жизнь"
+          },
+          {
+            "id": "finance",
+            "label": "Стоимость и финансы"
+          }
+        ],
+        "sections": [
+          {
+            "title": "Источники",
+            "text": "Публикуются только реальные отзывы с вручную проверенными источником, принадлежностью вузу и правом показа. Персональные данные удалены; тексты без разрешения заранее заменены на null."
+          },
+          {
+            "title": "Тональность и проверка",
+            "text": "Метки корпуса проверяет человек. В рейтинг входят только approved=true. Словарный анализ нового текста выполняется локально в браузере, не имеет калиброванной уверенности и требует ручной проверки."
+          },
+          {
+            "title": "Рейтинг",
+            "text": "P — положительные, N — отрицательные, U — нейтральные проверенные отзывы. Среднее p₀ считается до фильтров. Вес сглаживания — 10; при менее чем 10 отзывах место и оценка не публикуются."
+          },
+          {
+            "title": "Аспекты",
+            "text": "Проверенная тема учитывается один раз на отзыв. Сильная или слабая сторона требует не менее трёх подтверждений соответствующей тональности. Непроверенные темы исключаются."
+          },
+          {
+            "title": "Ограничения",
+            "text": "Корпус пока не содержит реальных отзывов, если показано пустое состояние. Отзывы не являются репрезентативным опросом и не устанавливают объективное качество образования; размер выборки не устраняет систематическое смещение."
+          }
+        ]
+      }
+    },
+    "omgau": {
+      "university": {
+        "id": "omgau",
+        "full_name": "Омский государственный аграрный университет имени П. А. Столыпина",
+        "short_name": "Омский ГАУ",
+        "city": "Омск",
+        "region": "Омская область",
+        "official_url": "https://www.omgau.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      "dynamics": [],
+      "topics": [],
+      "sources": [],
+      "recent_reviews": [],
+      "methodology": {
+        "version": "public-data-v1",
+        "timezone": "Europe/Moscow",
+        "counts": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "stats": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "sources": [],
+        "last_updated": null,
+        "requires_corpus": true,
+        "models": [],
+        "min_reviews": 10,
+        "smoothing": 10,
+        "min_topic_reviews": 3,
+        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
+        "positive_percent_formula": "100 × P / (P + N + U)",
+        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
+        "parameter_status": "Пилотные параметры; калибровка на реальном корпусе ещё не выполнена.",
+        "engine": "browser_rules",
+        "model_version": "ru-aspect-rules-1-browser",
+        "metrics_available": false,
+        "metrics": null,
+        "server_api_available": false,
+        "deployment": "github_pages",
+        "snapshot": true,
+        "exported_at": "2026-10-14T06:46:44Z",
+        "aspects": [
+          {
+            "id": "teaching",
+            "label": "Преподавание и учебный процесс"
+          },
+          {
+            "id": "career",
+            "label": "Практика и трудоустройство"
+          },
+          {
+            "id": "dormitory",
+            "label": "Общежитие"
+          },
+          {
+            "id": "infrastructure",
+            "label": "Инфраструктура"
+          },
+          {
+            "id": "administration",
+            "label": "Администрация"
+          },
+          {
+            "id": "student_life",
+            "label": "Студенческая жизнь"
+          },
+          {
+            "id": "finance",
+            "label": "Стоимость и финансы"
+          }
+        ],
+        "sections": [
+          {
+            "title": "Источники",
+            "text": "Публикуются только реальные отзывы с вручную проверенными источником, принадлежностью вузу и правом показа. Персональные данные удалены; тексты без разрешения заранее заменены на null."
+          },
+          {
+            "title": "Тональность и проверка",
+            "text": "Метки корпуса проверяет человек. В рейтинг входят только approved=true. Словарный анализ нового текста выполняется локально в браузере, не имеет калиброванной уверенности и требует ручной проверки."
+          },
+          {
+            "title": "Рейтинг",
+            "text": "P — положительные, N — отрицательные, U — нейтральные проверенные отзывы. Среднее p₀ считается до фильтров. Вес сглаживания — 10; при менее чем 10 отзывах место и оценка не публикуются."
+          },
+          {
+            "title": "Аспекты",
+            "text": "Проверенная тема учитывается один раз на отзыв. Сильная или слабая сторона требует не менее трёх подтверждений соответствующей тональности. Непроверенные темы исключаются."
+          },
+          {
+            "title": "Ограничения",
+            "text": "Корпус пока не содержит реальных отзывов, если показано пустое состояние. Отзывы не являются репрезентативным опросом и не устанавливают объективное качество образования; размер выборки не устраняет систематическое смещение."
+          }
+        ]
+      }
+    },
+    "timiryazev": {
+      "university": {
+        "id": "timiryazev",
+        "full_name": "Российский государственный аграрный университет — МСХА имени К. А. Тимирязева",
+        "short_name": "РГАУ-МСХА",
+        "city": "Москва",
+        "region": "Москва",
+        "official_url": "https://www.timacad.ru/",
+        "official_url_live_verified": false,
+        "reviews_total": 0,
+        "eligible_reviews": 0,
+        "pending_reviews": 0,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "positive_percent": null,
+        "smoothed_score": null,
+        "rank": null,
+        "small_sample": true,
+        "eligible": false,
+        "status": "no_data",
+        "reliability": "insufficient",
+        "strengths": [],
+        "weaknesses": [],
+        "baseline_positive_fraction": null,
+        "period_start": null,
+        "period_end": null,
+        "last_collected_at": null,
+        "pending_percent": null
+      },
+      "dynamics": [],
+      "topics": [],
+      "sources": [],
+      "recent_reviews": [],
+      "methodology": {
+        "version": "public-data-v1",
+        "timezone": "Europe/Moscow",
+        "counts": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "stats": {
+          "universities": 5,
+          "reviews": 0,
+          "approved": 0,
+          "pending_moderation": 0,
+          "sources": 0
+        },
+        "sources": [],
+        "last_updated": null,
+        "requires_corpus": true,
+        "models": [],
+        "min_reviews": 10,
+        "smoothing": 10,
+        "min_topic_reviews": 3,
+        "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
+        "positive_percent_formula": "100 × P / (P + N + U)",
+        "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
+        "parameter_status": "Пилотные параметры; калибровка на реальном корпусе ещё не выполнена.",
+        "engine": "browser_rules",
+        "model_version": "ru-aspect-rules-1-browser",
+        "metrics_available": false,
+        "metrics": null,
+        "server_api_available": false,
+        "deployment": "github_pages",
+        "snapshot": true,
+        "exported_at": "2026-10-14T06:46:44Z",
+        "aspects": [
+          {
+            "id": "teaching",
+            "label": "Преподавание и учебный процесс"
+          },
+          {
+            "id": "career",
+            "label": "Практика и трудоустройство"
+          },
+          {
+            "id": "dormitory",
+            "label": "Общежитие"
+          },
+          {
+            "id": "infrastructure",
+            "label": "Инфраструктура"
+          },
+          {
+            "id": "administration",
+            "label": "Администрация"
+          },
+          {
+            "id": "student_life",
+            "label": "Студенческая жизнь"
+          },
+          {
+            "id": "finance",
+            "label": "Стоимость и финансы"
+          }
+        ],
+        "sections": [
+          {
+            "title": "Источники",
+            "text": "Публикуются только реальные отзывы с вручную проверенными источником, принадлежностью вузу и правом показа. Персональные данные удалены; тексты без разрешения заранее заменены на null."
+          },
+          {
+            "title": "Тональность и проверка",
+            "text": "Метки корпуса проверяет человек. В рейтинг входят только approved=true. Словарный анализ нового текста выполняется локально в браузере, не имеет калиброванной уверенности и требует ручной проверки."
+          },
+          {
+            "title": "Рейтинг",
+            "text": "P — положительные, N — отрицательные, U — нейтральные проверенные отзывы. Среднее p₀ считается до фильтров. Вес сглаживания — 10; при менее чем 10 отзывах место и оценка не публикуются."
+          },
+          {
+            "title": "Аспекты",
+            "text": "Проверенная тема учитывается один раз на отзыв. Сильная или слабая сторона требует не менее трёх подтверждений соответствующей тональности. Непроверенные темы исключаются."
+          },
+          {
+            "title": "Ограничения",
+            "text": "Корпус пока не содержит реальных отзывов, если показано пустое состояние. Отзывы не являются репрезентативным опросом и не устанавливают объективное качество образования; размер выборки не устраняет систематическое смещение."
+          }
+        ]
+      }
+    }
+  },
+  "methodology": {
+    "version": "public-data-v1",
+    "timezone": "Europe/Moscow",
+    "counts": {
+      "universities": 5,
+      "reviews": 0,
+      "approved": 0,
+      "pending_moderation": 0,
+      "sources": 0
+    },
+    "stats": {
+      "universities": 5,
+      "reviews": 0,
+      "approved": 0,
+      "pending_moderation": 0,
+      "sources": 0
+    },
+    "sources": [],
+    "last_updated": null,
+    "requires_corpus": true,
+    "models": [],
+    "min_reviews": 10,
+    "smoothing": 10,
+    "min_topic_reviews": 3,
+    "score_formula": "100 × (P + 10 × p₀) / (P + N + U + 10)",
+    "positive_percent_formula": "100 × P / (P + N + U)",
+    "baseline_scope": "Все проверенные отзывы корпуса до применения фильтров",
+    "parameter_status": "Пилотные параметры; калибровка на реальном корпусе ещё не выполнена.",
+    "engine": "browser_rules",
+    "model_version": "ru-aspect-rules-1-browser",
+    "metrics_available": false,
+    "metrics": null,
+    "server_api_available": false,
+    "deployment": "github_pages",
+    "snapshot": true,
+    "exported_at": "2026-10-14T06:46:44Z",
+    "aspects": [
+      {
+        "id": "teaching",
+        "label": "Преподавание и учебный процесс"
+      },
+      {
+        "id": "career",
+        "label": "Практика и трудоустройство"
+      },
+      {
+        "id": "dormitory",
+        "label": "Общежитие"
+      },
+      {
+        "id": "infrastructure",
+        "label": "Инфраструктура"
+      },
+      {
+        "id": "administration",
+        "label": "Администрация"
+      },
+      {
+        "id": "student_life",
+        "label": "Студенческая жизнь"
+      },
+      {
+        "id": "finance",
+        "label": "Стоимость и финансы"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Источники",
+        "text": "Публикуются только реальные отзывы с вручную проверенными источником, принадлежностью вузу и правом показа. Персональные данные удалены; тексты без разрешения заранее заменены на null."
+      },
+      {
+        "title": "Тональность и проверка",
+        "text": "Метки корпуса проверяет человек. В рейтинг входят только approved=true. Словарный анализ нового текста выполняется локально в браузере, не имеет калиброванной уверенности и требует ручной проверки."
+      },
+      {
+        "title": "Рейтинг",
+        "text": "P — положительные, N — отрицательные, U — нейтральные проверенные отзывы. Среднее p₀ считается до фильтров. Вес сглаживания — 10; при менее чем 10 отзывах место и оценка не публикуются."
+      },
+      {
+        "title": "Аспекты",
+        "text": "Проверенная тема учитывается один раз на отзыв. Сильная или слабая сторона требует не менее трёх подтверждений соответствующей тональности. Непроверенные темы исключаются."
+      },
+      {
+        "title": "Ограничения",
+        "text": "Корпус пока не содержит реальных отзывов, если показано пустое состояние. Отзывы не являются репрезентативным опросом и не устанавливают объективное качество образования; размер выборки не устраняет систематическое смещение."
+      }
+    ]
+  },
+  "health": {
+    "status": "ok",
+    "database": "public_snapshot",
+    "model": "ready",
+    "engine": "browser_rules",
+    "model_version": "ru-aspect-rules-1-browser",
+    "ml_trained": false,
+    "model_diagnostic": null,
+    "deployment": "github_pages",
+    "exported_at": "2026-10-14T06:46:44Z",
+    "limitation": "Публичные данные обновляются через GitHub. Анализ работает локально; обученная модель не подключена."
   }
 }

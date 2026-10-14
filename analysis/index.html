@@ -30,17 +30,14 @@
       </nav>
     </div>
   </header>
-  
-  <aside class="pages-banner"><div class="container">Онлайн-версия: текст анализируется в вашем браузере. Каталог обновляется при публикации. <a href="/Baknin_Project/launch">Как запустить полную версию →</a></div></aside>
-  
-  <main id="main">
+  <main id="main"><noscript><div class="container browser-note">Включите JavaScript в браузере, чтобы загрузить каталог, использовать фильтры и анализировать отзывы.</div></noscript>
 <section class="container page-section">
   <div class="page-heading"><span class="eyebrow">ОТ ТЕКСТА К СМЫСЛУ</span><h1>Что стоит за отзывом?</h1><p>Проверьте тональность текста и посмотрите, какие стороны студенческой жизни в нём упоминаются.</p></div>
   <div class="analysis-grid">
     <form id="analysis-form" class="panel analysis-editor">
       <div class="editor-heading"><label for="analysis-text">Текст отзыва</label><span id="text-counter">0 / 5 000</span></div>
       <textarea id="analysis-text" name="text" rows="12" maxlength="5000" required placeholder="Вставьте отзыв об университете…" aria-describedby="analysis-hint"></textarea>
-      <p id="analysis-hint" class="field-hint">Текст обрабатывается локально в вашем браузере и не отправляется на сервер анализа.</p>
+      <p id="analysis-hint" class="field-hint">Анализ выполняется в вашем браузере. Текст не отправляется на сервер анализа и не добавляется в каталог отзывов.</p>
       <div class="editor-actions"><button id="analysis-submit" class="button button-primary" type="submit">Проанализировать <span aria-hidden="true">→</span></button><button class="button button-quiet" type="reset">Очистить</button></div>
     </form>
     <div id="analysis-result" class="panel analysis-output" aria-live="polite" aria-busy="false">
@@ -55,7 +52,7 @@
       <div><strong>АГРО / ОТЗЫВЫ</strong><p>Больше контекста для осознанного выбора.</p></div>
       <p class="footer-note">Автоматический анализ может ошибаться.<br>Читайте сами отзывы и проверяйте их источники.</p>
       <a class="text-link" href="/Baknin_Project/methodology">Принципы и ограничения <span aria-hidden="true">→</span></a>
-      <a class="text-link" href="/Baknin_Project/launch">Инструкция запуска →</a>
+      <a class="text-link" href="/Baknin_Project/launch">Как опубликовать сайт →</a>
     </div>
   </footer>
 </body>
